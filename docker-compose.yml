@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+
+  front-vite-react:
+    build:
+      context: ./front/
+    ports:
+      - "5173:5173"
+
+  back-symfony:
+    build:
+      context: ./app/
+    ports:
+      - "8000:8000"
+    
