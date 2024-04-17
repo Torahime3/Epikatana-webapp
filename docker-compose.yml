@@ -1,15 +1,31 @@
 version: '3.7'
 services:
 
-  front-vite-react:
-    build:
-      context: ./front/
+  postgresql:
+    image: postgres:13
     ports:
-      - "5173:5173"
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: dbkatana_epitech
+      POSTGRES_DB: dbkatana
+    volumes:
+      - ./data:/var/lib/postgresql/data
 
   back-symfony:
     build:
       context: ./app/
     ports:
       - "8000:8000"
+    depends_on:
+      - postgresql
+
+  front-vite-react:
+    build:
+      context: ./front/
+    ports:
+      - "5173:5173"
+    depends_on:
+      - postgresql
+  
     

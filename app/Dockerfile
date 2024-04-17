@@ -20,6 +20,9 @@ RUN php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
 COPY . .
 
+# Populate data
+RUN php bin/console doctrine:schema:update --force
+
 EXPOSE 8000
 
 CMD ["symfony", "server:start", "--no-tls"]
