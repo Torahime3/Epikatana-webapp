@@ -5,3 +5,4 @@ app/config/secrets/prod/prod.decrypt.private.php
 app/public/bundles/
 app/var/
 app/vendor/
+.DS_Store
