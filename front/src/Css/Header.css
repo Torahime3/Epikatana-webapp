@@ -1,0 +1,63 @@
+/* Header.css */
+
+/* Couleurs de base */
+:root {
+    --primary-color: #007bff; /* Bleu */
+    --secondary-color: #ffffff; /* Gris */
+    --hover-color: #ce1313; /* Blanc */
+    --hover-background-color: #333; /* Gris foncé */
+  }
+  
+  /* Styles de survol */
+  .header-link:hover,
+  .header-link-primary:hover,
+  .header-link-secondary:hover {
+    color: var(--hover-color); /* Changement de couleur au survol */
+    background-color: var(--hover-background-color); /* Changement de couleur de fond au survol */
+    transition: background-color 0.3s, color 0.3s; /* Transition fluide */
+  }
+  
+  /* Autres styles */
+  .header-title {
+    flex-grow: 1;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  .header-search {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header-search-input {
+    width: 150px;
+    padding: 8px;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  
+  .header-link {
+    margin-right: 10px;
+    text-decoration: none;
+    color: var(--secondary-color);
+    transition: color 0.3s; /* Transition fluide */
+  }
+  
+  .header-link-primary {
+    color: var(--primary-color);
+  }
+  
+  .header-link-secondary {
+    color: var(--secondary-color);
+  }
+  
+  .header-cart {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header-logo {
+    height: 30px;
+    width: 30px;
+  }
+  
