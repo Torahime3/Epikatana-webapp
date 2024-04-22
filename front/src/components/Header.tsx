@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import de Link depuis react-router-dom
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -15,29 +14,21 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          className="header-icon-button"
-        >
-          {/* Logo */}
+        {}
+        <a href="/" className="header-icon-button" aria-label="home">
           <img src="https://www.creativefabrica.com/wp-content/uploads/2021/03/31/katana-sword-logo-vintage-vector-design-Graphics-10177934-1.jpg" alt="logo" className="header-logo" />
-        </IconButton>
+        </a>
         <Typography variant="h6" component="div" className="header-title">
           {title}
         </Typography>
         <div className="header-search">
-          {/* Barre de recherche */}
           <input type="text" placeholder="Rechercher..." className="header-search-input" />
-          {/* Liens */}
-          <Link to="/nos-produits" className="header-link">Nos produits</Link>
-          <Link to="/qui-sommes-nous" className="header-link">Qui Sommes-Nous</Link>
-          <Link to="/se-connecter" className="header-link header-link-primary">Se connecter</Link>
-          <Link to="/inscription" className="header-link header-link-secondary">S'inscrire</Link>
+          <a href="/nos-produits" className="header-link">Nos produits</a>
+          <a href="/qui-sommes-nous" className="header-link">Qui Sommes-Nous</a>
+          <a href="/connexion" className="header-link header-link-primary">Se connecter</a>
+          <a href="/inscription" className="header-link header-link-secondary">S'inscrire</a>
         </div>
         <div className="header-cart">
-          {/* Icône du panier */}
           <IconButton color="inherit" aria-label="shopping cart">
             <ShoppingCartIcon />
           </IconButton>

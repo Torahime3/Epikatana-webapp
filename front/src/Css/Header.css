@@ -1,23 +1,18 @@
-/* Header.css */
-
-/* Couleurs de base */
 :root {
-    --primary-color: #007bff; /* Bleu */
-    --secondary-color: #ffffff; /* Gris */
-    --hover-color: #ce1313; /* Blanc */
-    --hover-background-color: #333; /* Gris foncé */
+    --primary-color: #007bff; 
+    --secondary-color: #ffffff; 
+    --hover-color: #ce1313;
+    --hover-background-color: #333;
   }
   
-  /* Styles de survol */
   .header-link:hover,
   .header-link-primary:hover,
   .header-link-secondary:hover {
-    color: var(--hover-color); /* Changement de couleur au survol */
-    background-color: var(--hover-background-color); /* Changement de couleur de fond au survol */
-    transition: background-color 0.3s, color 0.3s; /* Transition fluide */
+    color: var(--hover-color);
+    background-color: var(--hover-background-color); 
+    transition: background-color 0.3s, color 0.3s; 
   }
   
-  /* Autres styles */
   .header-title {
     flex-grow: 1;
     font-family: Arial, sans-serif;
@@ -40,7 +35,7 @@
     margin-right: 10px;
     text-decoration: none;
     color: var(--secondary-color);
-    transition: color 0.3s; /* Transition fluide */
+    transition: color 0.3s; 
   }
   
   .header-link-primary {
