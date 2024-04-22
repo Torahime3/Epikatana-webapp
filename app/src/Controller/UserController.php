@@ -44,6 +44,8 @@ class UserController extends AbstractController
         $currentUser->setLogin($updatedUser->getLogin());
         $currentUser->setPassword($updatedUser->getPassword());
         $currentUser->setEmail($updatedUser->getEmail());
+        $currentUser->setFirstname($updatedUser->getFirstname());
+        $currentUser->setLastname($updatedUser->getLastname());
         
         $em->flush();
 
