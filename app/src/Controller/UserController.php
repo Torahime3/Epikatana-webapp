@@ -3,73 +3,73 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 class UserController extends AbstractController
 {
-    /**
-     * @Route("/users", name="user_index", methods={"GET"})
-     */
-    public function index(): Response
+
+    // ROUTE POUR GET TOUS LES USERS
+    #[Route('/api/users', name: 'users_getAll', methods: ['GET'])]
+    public function getUsersList(UserRepository $userRepository, SerializerInterface $serializer): JsonResponse
     {
-        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
-        return $this->json($users);
+        $users = $userRepository->findAll();
+        $jsonUsers = $serializer->serialize($users, 'json');
+        return new JsonResponse($jsonUsers, Response::HTTP_OK, [], true);
     }
 
-    /**
-     * @Route("/users/{id}", name="user_show", methods={"GET"})
-     */
-    public function show(User $user): Response
+    //ROUTE POUR GET UN USER PAR ID
+    #[Route('/api/users/{id}', name: 'users_getById', methods: ['GET'])]
+    public function getUsersById(int $id, UserRepository $userRepository, SerializerInterface $serializer): JsonResponse
     {
-        return $this->json($user);
+        $user = $userRepository->find($id);
+        if($user){
+            $jsonUser = $serializer->serialize($user, 'json');
+            return new JsonResponse($jsonUser, Response::HTTP_OK, [], true);
+        }
+        return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
 
-    /**
-     * @Route("/users", name="user_create", methods={"POST"})
-     */
-    public function create(Request $request): Response
-    {
-        $data = json_decode($request->getContent(), true);
+    //ROUTE POUR PUT UN USER
+    #[Route('/api/users/{id}', name: 'users_put', methods: ['PUT'])]
+    public function updateUser(Request $request, SerializerInterface $serializer, User $currentUser, EntityManagerInterface $em){
+        $updatedUser = $serializer->deserialize($request->getContent(), User::class, 'json');
+        $currentUser->setLogin($updatedUser->getLogin());
+        $currentUser->setPassword($updatedUser->getPassword());
+        $currentUser->setEmail($updatedUser->getEmail());
+        
+        $em->flush();
 
-        $user = new User();
-        // Set user properties based on incoming data
-        // Example: $user->setUsername($data['username']);
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($user);
-        $entityManager->flush();
-
-        return $this->json($user);
+        return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+        
     }
 
-    /**
-     * @Route("/users/{id}", name="user_update", methods={"PUT"})
-     */
-    public function update(Request $request, User $user): Response
+    // ROUTE POUR POST UN USER
+    #[Route('/api/users', name: 'users_post', methods: ['POST'])]
+    public function createUser(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator): JsonResponse 
     {
-        $data = json_decode($request->getContent(), true);
+        $user = $serializer->deserialize($request->getContent(), User::class, 'json');
+        $em->persist($user);
+        $em->flush();
 
-        // Update user properties based on incoming data
-        // Example: $user->setUsername($data['username']);
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->flush();
-
-        return $this->json($user);
+        $jsonUser = $serializer->serialize($user, 'json');
+        return new JsonResponse($jsonUser, Response::HTTP_CREATED, ['Location' => $urlGenerator->generate('users_getById', ['id' => $user->getId()])]);
     }
 
-    /**
-     * @Route("/users/{id}", name="user_delete", methods={"DELETE"})
-     */
-    public function delete(User $user): Response
+    // ROUTE POUR DELETE UN USER
+    #[Route('/api/users/{id}', name: 'users_delete', methods: ['DELETE'])]
+    public function deleteUser(User $user, EntityManagerInterface $em): JsonResponse
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($user);
-        $entityManager->flush();
-
-        return new Response(null, Response::HTTP_NO_CONTENT);
+        $em->remove($user);
+        $em->flush();
+        return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
+
 }
