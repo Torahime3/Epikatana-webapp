@@ -2,8 +2,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Home';
 import Products from './pages/Products';
-import Authentication from './components/Authentication';
-import { Business } from '@mui/icons-material';
+import Authentication from './pages/Authentication';
+import Business from './pages/Business';
+import './styles/App.css';
 
 
 function App() {
