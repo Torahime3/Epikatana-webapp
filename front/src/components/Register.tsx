@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Register: React.FC = () => {
+const Login: React.FC = () => {
   return (
     <div>
       <h1>Inscription</h1>
@@ -9,4 +9,4 @@ const Register: React.FC = () => {
   );
 };
 
-export default Register;
+export default Login;

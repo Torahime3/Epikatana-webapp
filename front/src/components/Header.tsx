@@ -64,8 +64,8 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
           >
             <a href="/nos-produits" className="header-menu-link" onClick={handleClose}>Nos produits</a>
             <a href="/qui-sommes-nous" className="header-menu-link" onClick={handleClose}>Qui sommes nous</a>
-            <a href="/connexion" className="header-menu-link" onClick={handleClose}>Inscription</a>
-            <a href="/inscription" className="header-menu-link" onClick={handleClose}>Connexion</a>
+            <a href="/login" className="header-menu-link" onClick={handleClose}>Inscription</a>
+            <a href="/register" className="header-menu-link" onClick={handleClose}>Connexion</a>
           </Menu>
         </div>
       </Toolbar>
