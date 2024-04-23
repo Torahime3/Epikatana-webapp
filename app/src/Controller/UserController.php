@@ -16,6 +16,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class UserController extends AbstractController
 {
 
+    
     // ROUTE POUR GET TOUS LES USERS
     #[Route('/api/users', name: 'users_getAll', methods: ['GET'])]
     public function getUsersList(UserRepository $userRepository, SerializerInterface $serializer): JsonResponse
