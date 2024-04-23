@@ -4,7 +4,7 @@ import Home from './components/Home';
 import Products from './components/Products';
 import Login from './components/Login';
 import Register from './components/Register';
-import Nous from './components/Nous';
+import Business from './components/Business';
 
 function App() {
   return (
@@ -13,9 +13,9 @@ function App() {
         <Header title="Epikatana" />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/nos-produits" element={<Products />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/qui-sommes-nous" element={<Nous />} />
+          <Route path="/business" element={<Business />} />
           <Route path="/register" element={<Register />} />
         </Routes>
       </div>

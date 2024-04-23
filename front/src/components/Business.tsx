@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Nous: React.FC = () => {
+const Business: React.FC = () => {
   return (
     <div>
-      <h1>Nous </h1>
+      <h1>Qui sommes nous ?</h1>
       <p>Entreprise route</p>
     </div>
   );
 };
 
-export default Nous;
+export default Business;
