@@ -2,21 +2,20 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './components/Home';
 import Products from './components/Products';
-import Connection from './components/Connection';
-import Inscription from './components/Inscription';
-import Nous from './components/Nous';
+import Authentication from './components/Authentication';
+import Business from './components/Business';
+import './App.css';
 
 function App() {
   return (
     <Router>
       <div>
-        <Header title="Header2Merde" />
+        <Header title="Epikatana" />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/nos-produits" element={<Products />} />
-          <Route path="/connexion" element={<Connection />} />
-          <Route path="/qui-sommes-nous" element={<Inscription />} />
-          <Route path="/inscription" element={<Nous />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/business" element={<Business />} />
+          <Route path="/login" element={<Authentication />} />
         </Routes>
       </div>
     </Router>

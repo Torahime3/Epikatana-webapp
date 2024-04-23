@@ -1,0 +1,60 @@
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #ffffff;
+    --hover-color: #ce1313;
+    --hover-background-color: #333;
+  }
+
+  .header-toolbar {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .header-left-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
+
+  .header-title {
+    flex-grow: 1;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+
+  .header-search {
+    display: flex;
+    align-items: center;
+  }
+
+  .header-search-input {
+    width: 150px;
+    padding: 8px;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+
+  .header-cart {
+    display: flex;
+    align-items: center;
+  }
+
+  .header-logo {
+    height: 30px;
+    width: 30px;
+  }
+  .header-menu-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 8px 16px;
+  }
+
+  .header-menu-link:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
