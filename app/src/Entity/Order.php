@@ -24,6 +24,10 @@ class Order
     #[ORM\Column(type: Types::ARRAY)]
     private array $products = [];
 
+    #[ORM\ManyToOne(inversedBy: 'orders')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $idUser = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +65,18 @@ class Order
     public function setProducts(array $products): static
     {
         $this->products = $products;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?User $idUser): static
+    {
+        $this->idUser = $idUser;
 
         return $this;
     }
