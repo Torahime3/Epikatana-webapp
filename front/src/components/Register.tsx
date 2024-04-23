@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Inscription: React.FC = () => {
+const Register: React.FC = () => {
   return (
     <div>
       <h1>Inscription</h1>
@@ -9,4 +9,4 @@ const Inscription: React.FC = () => {
   );
 };
 
-export default Inscription;
+export default Register;

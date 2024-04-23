@@ -3,7 +3,7 @@ import Header from './components/Header';
 import Home from './components/Home';
 import Products from './components/Products';
 import Connection from './components/Connection';
-import Inscription from './components/Inscription';
+import Register from './components/Register';
 import Nous from './components/Nous';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
           <Route path="/nos-produits" element={<Products />} />
           <Route path="/connexion" element={<Connection />} />
           <Route path="/qui-sommes-nous" element={<Nous />} />
-          <Route path="/inscription" element={<Inscription />} />
+          <Route path="/inscription" element={<Register />} />
         </Routes>
       </div>
     </Router>
