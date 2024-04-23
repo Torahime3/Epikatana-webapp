@@ -5,14 +5,6 @@
     --hover-background-color: #333;
   }
 
-  .header-link:hover,
-  .header-link-primary:hover,
-  .header-link-secondary:hover {
-    color: var(--hover-color);
-    background-color: var(--hover-background-color);
-    transition: background-color 0.3s, color 0.3s;
-  }
-
   .header-toolbar {
     display: flex;
     justify-content: space-between;
@@ -45,21 +37,6 @@
     padding: 8px;
     border-radius: 5px;
     margin-right: 10px;
-  }
-
-  .header-link {
-    margin-right: 10px;
-    text-decoration: none;
-    color: var(--secondary-color);
-    transition: color 0.3s;
-  }
-
-  .header-link-primary {
-    color: var(--primary-color);
-  }
-
-  .header-link-secondary {
-    color: var(--secondary-color);
   }
 
   .header-cart {

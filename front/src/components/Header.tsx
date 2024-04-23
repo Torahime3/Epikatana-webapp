@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Menu from '@mui/material/Menu';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import '../Css/Header.css';
+import '../styles/Header.css';
 
 interface HeaderProps {
   title: string;
@@ -64,8 +64,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
           >
             <a href="/products" className="header-menu-link" onClick={handleClose}>Nos produits</a>
             <a href="/business" className="header-menu-link" onClick={handleClose}>Qui sommes nous</a>
-            <a href="/login" className="header-menu-link" onClick={handleClose}>Inscription</a>
-            <a href="/register" className="header-menu-link" onClick={handleClose}>Connexion</a>
+            <a href="/login" className="header-menu-link" onClick={handleClose}>Connexion</a>
           </Menu>
         </div>
       </Toolbar>
