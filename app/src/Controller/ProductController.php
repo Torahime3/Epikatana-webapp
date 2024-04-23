@@ -3,73 +3,74 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 class ProductController extends AbstractController
 {
-    /**
-     * @Route("/products", name="product_index", methods={"GET"})
-     */
-    public function index(): Response
+
+    // ROUTE POUR GET TOUS LES PRODUCTS
+    #[Route('/api/products', name: 'products_getAll', methods: ['GET'])]
+    public function getProductsList(ProductRepository $productRepository, SerializerInterface $serializer): JsonResponse
     {
-        $products = $this->getDoctrine()->getRepository(Product::class)->findAll();
-        return $this->json($products);
+        $products = $productRepository->findAll();
+        $jsonProducts = $serializer->serialize($products, 'json');
+        return new JsonResponse($jsonProducts, Response::HTTP_OK, [], true);
     }
 
-    /**
-     * @Route("/products/{id}", name="product_show", methods={"GET"})
-     */
-    public function show(Product $product): Response
+    // ROUTE POUR GET UN PRODUCT PAR ID
+    #[Route('/api/products/{id}', name: 'products_getById', methods: ['GET'])]
+    public function getProductsById(int $id, ProductRepository $productRepository, SerializerInterface $serializer): JsonResponse
     {
-        return $this->json($product);
+        $product = $productRepository->find($id);
+        if($product){
+            $jsonProduct = $serializer->serialize($product, 'json');
+            return new JsonResponse($jsonProduct, Response::HTTP_OK, [], true);
+        }
+        return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
 
-    /**
-     * @Route("/products", name="product_create", methods={"POST"})
-     */
-    public function create(Request $request): Response
-    {
-        $data = json_decode($request->getContent(), true);
+    // ROUTE POUR PUT UN PRODUCT
+    #[Route('/api/products/{id}', name: 'products_put', methods: ['PUT'])]
+    public function updateBook(Request $request, SerializerInterface $serializer, Product $currentProduct, EntityManagerInterface $em){
+        $updatedProduct = $serializer->deserialize($request->getContent(), Product::class, 'json');
+        $currentProduct->setName($updatedProduct->getName());
+        $currentProduct->setDescription($updatedProduct->getDescription());
+        $currentProduct->setPhoto($updatedProduct->getPhoto());
+        $currentProduct->setPrice($updatedProduct->getPrice());
+        
+        $em->flush();
 
-        $product = new Product();
-        // Set product properties based on incoming data
-        // Example: $product->setName($data['name']);
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($product);
-        $entityManager->flush();
-
-        return $this->json($product);
+        return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+        
     }
 
-    /**
-     * @Route("/products/{id}", name="product_update", methods={"PUT"})
-     */
-    public function update(Request $request, Product $product): Response
+    // ROUTE POUR POST UN PRODUCT
+    #[Route('/api/products', name: 'products_post', methods: ['POST'])]
+    public function createBook(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator): JsonResponse 
     {
-        $data = json_decode($request->getContent(), true);
+        $product = $serializer->deserialize($request->getContent(), Product::class, 'json');
+        $em->persist($product);
+        $em->flush();
 
-        // Update product properties based on incoming data
-        // Example: $product->setName($data['name']);
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->flush();
-
-        return $this->json($product);
+        $jsonProduct = $serializer->serialize($product, 'json');
+        return new JsonResponse($jsonProduct, Response::HTTP_CREATED, ['Location' => $urlGenerator->generate('products_getById', ['id' => $product->getId()])], true);
     }
-
-    /**
-     * @Route("/products/{id}", name="product_delete", methods={"DELETE"})
-     */
-    public function delete(Product $product): Response
+    
+    // ROUTE POUR DELETE UN PRODUCT
+    #[Route('/api/products/{id}', name: 'products_delete', methods: ['DELETE'])]
+    public function deleteProduct(Product $product, EntityManagerInterface $em): JsonResponse 
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($product);
-        $entityManager->flush();
+        $em->remove($product);
+        $em->flush();
 
-        return new Response(null, Response::HTTP_NO_CONTENT);
+        return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
 }
