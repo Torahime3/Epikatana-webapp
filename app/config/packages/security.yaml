@@ -55,3 +55,12 @@ when@test:
                 cost: 4 # Lowest possible value for bcrypt
                 time_cost: 3 # Lowest possible value for argon
                 memory_cost: 10 # Lowest possible value for argon
+                # cors.yaml
+nelmio_cors:
+    paths:
+        '^/api/':
+            allow_origin: ['http://localhost:5173']
+            allow_methods: ['GET', 'OPTIONS'] 
+            allow_headers: ['Content-Type', 'Authorization'] 
+            max_age: 3600 
+            hosts: ['^localhost$', '^127.0.0.1$'] 
