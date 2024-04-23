@@ -4,6 +4,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Menu from '@mui/material/Menu';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import '../Css/Header.css';
 
 interface HeaderProps {
@@ -11,30 +13,60 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ title }) => {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <AppBar position="static">
-      <Toolbar>
-        {}
-        <a href="/" className="header-icon-button" aria-label="home">
-          <img src="https://www.creativefabrica.com/wp-content/uploads/2021/03/31/katana-sword-logo-vintage-vector-design-Graphics-10177934-1.jpg" alt="logo" className="header-logo" />
-        </a>
-        <Typography variant="h6" component="div" className="header-title">
-          {title}
-        </Typography>
-        <div className="header-search">
-          <input type="text" placeholder="Rechercher..." className="header-search-input" />
-          <a href="/nos-produits" className="header-link">Nos produits</a>
-          <a href="/qui-sommes-nous" className="header-link">Qui Sommes-Nous</a>
-          <a href="/connexion" className="header-link header-link-primary">Se connecter</a>
-          <a href="/inscription" className="header-link header-link-secondary">S'inscrire</a>
+      <Toolbar className="header-toolbar">
+        <div className="header-left">
+          <div className="header-left-content">
+            <a href="/" className="header-icon-button" aria-label="home">
+              <img src="https://www.creativefabrica.com/wp-content/uploads/2021/03/31/katana-sword-logo-vintage-vector-design-Graphics-10177934-1.jpg" alt="logo" className="header-logo" />
+            </a>
+            <Typography variant="h6" component="div" className="header-title">
+              {title}
+            </Typography>
+          </div>
         </div>
-        <div className="header-cart">
+        <div className="header-center">
+          <input type="text" placeholder="Rechercher..." className="header-search-input" />
+        </div>
+        <div className="header-right">
           <IconButton color="inherit" aria-label="shopping cart">
             <ShoppingCartIcon />
           </IconButton>
           <Typography variant="body1" color="inherit">
             Panier
           </Typography>
+          <IconButton
+            color="inherit"
+            aria-label="more"
+            aria-controls="header-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+          >
+            <MoreVertIcon />
+          </IconButton>
+          <Menu
+            id="header-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <a href="/nos-produits" className="header-menu-link" onClick={handleClose}>Nos produits</a>
+            <a href="/qui-sommes-nous" className="header-menu-link" onClick={handleClose}>Qui sommes nous</a>
+            <a href="/connexion" className="header-menu-link" onClick={handleClose}>Inscription</a>
+            <a href="/inscription" className="header-menu-link" onClick={handleClose}>Connexion</a>
+          </Menu>
         </div>
       </Toolbar>
     </AppBar>

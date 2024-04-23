@@ -13,9 +13,9 @@ function App() {
         <Header title="Epikatana" />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/nos produits" element={<Products />} />
+          <Route path="/nos-produits" element={<Products />} />
           <Route path="/connexion" element={<Connection />} />
-          <Route path="/qui sommes nous" element={<Nous />} />
+          <Route path="/qui-sommes-nous" element={<Nous />} />
           <Route path="/inscription" element={<Inscription />} />
         </Routes>
       </div>
