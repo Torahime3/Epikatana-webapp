@@ -1,48 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useProducts } from '../hooks/fetchProducts';
 import '../styles/ProductsList.css'; 
+import Product from '../components/Product';
 
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  photo: string;
-}
 
-const ProductList: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+const ProductList = () => {
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get('https://localhost:8000/api/products');
-        if (Array.isArray(response.data)) {
-          setProducts(response.data);
-        } else {
-          console.error('Invalid response format. Response:', response);
-        }
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      }
-    };
-  
-    fetchProducts();
-  }, []);
+  const { data: products, isLoading, error } = useProducts();
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>An error occurred: {error.message}</div>;
 
   return (
-    <div className="product-container">
-      {products.map((product) => (
-        <div key={product.id} className="product-card">
-          <h2>{product.name}</h2>
-          <p>Description : {product.description}</p>
-          <p>Prix : {product.price}</p>
-          {product.photo && (
-            <img src={product.photo} alt={product.name} />
-          )}
-        </div>
-      ))}
-    </div>
+    <>
+      <h1> Liste de produits </h1>
+      <div className="product-container">
+        {products.map((product: Product) => (
+          <Product key={product.id} {...product} />
+        ))}
+      </div>
+    </>
   );
 };
 

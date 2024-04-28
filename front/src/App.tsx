@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import Products from './pages/Products';
 import Authentication from './pages/Authentication';
 import Business from './pages/Business';
-import './styles/App.css';
+import './App.css';
 
 
 function App() {

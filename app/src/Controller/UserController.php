@@ -11,11 +11,35 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 use Doctrine\ORM\EntityManagerInterface;
 
 class UserController extends AbstractController
 {
 
+    private $userPasswordHasher;
+    
+    public function __construct(UserPasswordHasherInterface $userPasswordHasher)
+    {
+        $this->userPasswordHasher = $userPasswordHasher;
+    }
+
+    //ROUTE POUR SE REGISTER
+    #[Route('/api/register', name: 'register', methods: ['POST'])]
+    public function register(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator): JsonResponse
+    {
+    
+        $user = $serializer->deserialize($request->getContent(), User::class, 'json');
+        $user->setLogin(strtolower($user->getFirstname().$user->getLastname()).rand(0, 9999));
+        $user->setPassword($this->userPasswordHasher->hashPassword($user, $user->getPassword()));
+        $user->setRoles(['ROLE_USER']);
+        $em->persist($user);
+        $em->flush();
+
+        $jsonUser = $serializer->serialize($user, 'json');
+        return new JsonResponse($jsonUser, Response::HTTP_CREATED, ['Location' => $urlGenerator->generate('users_getById', ['id' => $user->getId()])]);
+    }
     
     // ROUTE POUR GET TOUS LES USERS
     #[Route('/api/users', name: 'users_getAll', methods: ['GET'])]
