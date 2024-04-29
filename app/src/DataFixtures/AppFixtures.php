@@ -3,6 +3,8 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
+use App\Entity\Cart;
+use App\Entity\Order;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -30,6 +32,8 @@ class AppFixtures extends Fixture
         $userNathan->setRoles(['ROLE_USER']);
         $userNathan->setPassword($this->userPasswordHasher->hashPassword($userNathan
         , 'password'));
+        $cartNathan = new Cart();
+        $cartNathan->setIdUser($userNathan);
         $manager->persist($userNathan);
     
 
@@ -42,16 +46,67 @@ class AppFixtures extends Fixture
         $userSteven->setRoles(['ROLE_USER']);
         $userSteven->setPassword($this->userPasswordHasher->hashPassword($userSteven
         , 'password'));
+        $cartSteven = new Cart();
+        $cartSteven->setIdUser($userSteven);
         $manager->persist($userSteven);
 
-        for ($i = 0; $i < 10; $i++) {
+        // Create 30 product
+        for ($i = 0; $i < mt_rand(5, 30); $i++) {
             $product = new Product();
             $product->setName('Product ' . $i);
             $product->setPrice(mt_rand(10, 100));
             $product->setDescription('Description of product ' . $i);
             $product->setPhoto('https://www.konjaku.fr/media/42392/vrai-katana-1.jpg');
+
+            if (mt_rand(0, 1) === 1) {
+                $cartNathan->addProduct($product);
+            }
+
+            if (mt_rand(0, 1) === 1) {
+                $cartSteven->addProduct($product);
+            }
+            
             $manager->persist($product);
         }
+
+        for ($i = 0; $i < mt_rand(1, 3); $i++) {
+            $order = new Order();
+            $order->setIdUser($userNathan);
+            $order->setCreationDate(new \DateTime());
+
+            for($j = 0; $j < mt_rand(1, 5); $j++) {
+                $product = new Product();
+                $product->setName('Product Order ' . $j);
+                $product->setPrice(mt_rand(10, 100));
+                $product->setDescription('Description of product Order ' . $j);
+                $product->setPhoto('https://www.konjaku.fr/media/42392/vrai-katana-1.jpg');
+                $order->addProduct($product);
+                $manager->persist($product);
+            }
+
+            $manager->persist($order);
+        }
+
+        for ($i = 0; $i < mt_rand(1, 3); $i++) {
+            $order = new Order();
+            $order->setIdUser($userSteven);
+            $order->setCreationDate(new \DateTime());
+
+            for($j = 0; $j < mt_rand(1, 5); $j++) {
+                $product = new Product();
+                $product->setName('Product Order ' . $j);
+                $product->setPrice(mt_rand(10, 100));
+                $product->setDescription('Description of product Order ' . $j);
+                $product->setPhoto('https://www.konjaku.fr/media/42392/vrai-katana-1.jpg');
+                $order->addProduct($product);
+                $manager->persist($product);
+            }
+
+            $manager->persist($order);
+        }
+
+        $manager->persist($cartNathan);
+        $manager->persist($cartSteven);
         $manager->flush();
     }
 }

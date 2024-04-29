@@ -8,33 +8,42 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column]   
+    #[Groups(["getMe"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(["getMe"])]
     private ?string $login = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(["getMe"])]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(["getMe"])]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 180)]
+    #[Groups(["getMe"])]
     private ?string $email = null;
 
     /**
      * @var list<string> The user roles
      */
     #[ORM\Column]
+    #[Groups(["getMe"])]
     private array $roles = [];
 
     /**
@@ -51,9 +60,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var Collection<int, Order>
      */
     #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'idUser')]
+    #[Groups(["getMe"])]
     private Collection $orders;
 
     #[ORM\OneToOne(mappedBy: 'idUser', cascade: ['persist', 'remove'])]
+    #[Groups(["getMe"])]
     private ?Cart $cart = null;
 
     public function __construct()
