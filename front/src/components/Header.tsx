@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -8,16 +9,14 @@ import Menu from '@mui/material/Menu';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useCookies } from 'react-cookie';
 import '../styles/Header.css';
-import { useCookies } from 'react-cookie';
 
 interface HeaderProps {
   title: string;
 }
 
 const Header: React.FC<HeaderProps> = ({ title }) => {
-  const [cookies] = useCookies(['userToken']); // Get the userToken cookie
+  const [cookies, setCookie, removeCookie] = useCookies(['userToken']); // Get the userToken cookie and removeCookie function
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [cookies] = useCookies(['userToken']);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -25,6 +24,13 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    // Remove the userToken cookie
+    removeCookie('userToken');
+    // Redirect to the login page or any other desired page after logout
+    window.location.href = '/login'; // Change the URL as needed
   };
 
   return (
@@ -69,7 +75,11 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
             <a href="/products" className="header-menu-link" onClick={handleClose}>Nos produits</a>
             {cookies.userToken && <a href="/orders" className="header-menu-link" onClick={handleClose}>Commandes</a>}
             <a href="/business" className="header-menu-link" onClick={handleClose}>Qui sommes nous</a>
-            <a href="/login" className="header-menu-link" onClick={handleClose}>Connexion</a>
+            {cookies.userToken !== undefined ? (
+              <a href="/logout" className="header-menu-link" onClick={handleLogout}>Déconnexion</a>
+            ) : (
+              <a href="/login" className="header-menu-link" onClick={handleClose}>Connexion</a>
+            )}
             {cookies.userToken !== undefined ? (
               <a href="/profile" className="header-menu-link" onClick={handleClose}>Profile</a>
             ) : (

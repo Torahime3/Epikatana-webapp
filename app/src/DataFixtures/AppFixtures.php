@@ -9,7 +9,6 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Entity\Product;
-use App\Entity\Order;
 
 class AppFixtures extends Fixture
 {
@@ -66,7 +65,7 @@ class AppFixtures extends Fixture
             if (mt_rand(0, 1) === 1) {
                 $cartSteven->addProduct($product);
             }
-            
+
             $manager->persist($product);
         }
 
