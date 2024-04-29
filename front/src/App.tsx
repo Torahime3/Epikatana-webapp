@@ -6,7 +6,9 @@ import Orders from './pages/Orders';
 import OrderDetails from './pages/OrderDetails';
 import Authentication from './pages/Authentication';
 import Business from './pages/Business';
+import Profile from './pages/Profile';
 import './App.css';
+
 
 
 function App() {
@@ -21,6 +23,7 @@ function App() {
           <Route path="/orders/:id" element={<OrderDetails />} />
           <Route path="/business" element={<Business />} />
           <Route path="/login" element={<Authentication />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </Router>

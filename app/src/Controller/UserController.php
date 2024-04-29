@@ -25,6 +25,15 @@ class UserController extends AbstractController
         $this->userPasswordHasher = $userPasswordHasher;
     }
 
+    //ROUTE POUR RECUPERER L'UTILISATEUR CONNECTE
+    #[Route('/api/me', name: 'me', methods: ['GET'])]
+    public function me(SerializerInterface $serializer): JsonResponse
+    {
+        $user = $this->getUser();
+        $jsonUser = $serializer->serialize($user, 'json', ['groups' => ['getMe']]);
+        return new JsonResponse($jsonUser, Response::HTTP_OK, [], true);
+    }
+
     //ROUTE POUR SE REGISTER
     #[Route('/api/register', name: 'register', methods: ['POST'])]
     public function register(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator): JsonResponse
