@@ -7,12 +7,13 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Entity\Product;
+use App\Entity\Order;
 
 class AppFixtures extends Fixture
 {
 
     private $userPasswordHasher;
-    
+
     public function __construct(UserPasswordHasherInterface $userPasswordHasher)
     {
         $this->userPasswordHasher = $userPasswordHasher;
@@ -31,7 +32,7 @@ class AppFixtures extends Fixture
         $userNathan->setPassword($this->userPasswordHasher->hashPassword($userNathan
         , 'password'));
         $manager->persist($userNathan);
-    
+
 
         // Create Steven Dorion user
         $userSteven = new User();
@@ -53,5 +54,6 @@ class AppFixtures extends Fixture
             $manager->persist($product);
         }
         $manager->flush();
+
     }
 }
