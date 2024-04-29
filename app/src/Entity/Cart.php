@@ -15,7 +15,7 @@ class Cart
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(["getMe"])]
+    #[Groups(["getMe", "getCarts"])]
     private ?int $id = null;
 
     #[ORM\OneToOne(inversedBy: 'cart', cascade: ['persist', 'remove'])]
@@ -26,7 +26,7 @@ class Cart
      * @var Collection<int, Product>
      */
     #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'carts')]
-    #[Groups(["getMe"])]
+    #[Groups(["getMe","getCarts"])]
     private Collection $products;
 
     public function __construct()

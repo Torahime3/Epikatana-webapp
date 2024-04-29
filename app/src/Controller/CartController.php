@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Cart;
 use App\Entity\Product;
+use App\Repository\CartRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,90 +18,57 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class CartController extends AbstractController
 {
-    #[Route('/api/carts/{productId}', name: 'add_to_cart', methods: ['POST'])]
-    public function addToCart(Product $product): JsonResponse
+    // ROUTE POUR GET TOUS LES CARTS
+    #[Route('/api/carts', name: 'carts_getAll', methods: ['GET'])]
+    public function getCartsList(CartRepository $cartRepository, SerializerInterface $serializer): JsonResponse
     {
-        $user = $this->getUser();
-
-        if (!$user) {
-            return new JsonResponse(['message' => 'User not authenticated'], Response::HTTP_UNAUTHORIZED);
-        }
-
-        $cart = $user->getCart();
-
-        if (!$cart) {
-            $cart = new Cart();
-            $cart->setIdUser($user);
-        }
-
-        $cart->addProduct($product);
-        $this->getDoctrine()->getManager()->flush();
-
-        return new JsonResponse(['message' => 'Product added to cart successfully']);
+        $carts = $cartRepository->findAll();
+        $jsonCarts = $serializer->serialize($carts, 'json', ['groups' => 'getCarts']);
+        return new JsonResponse($jsonCarts, Response::HTTP_OK, [], true);
     }
 
-    #[Route('/api/carts/{productId}', name: 'remove_from_cart', methods: ['DELETE'])]
-    public function removeFromCart(Product $product): JsonResponse
+
+    //ROUTE POUR GET UN CART PAR ID
+    #[Route('/api/carts/{id}', name: 'carts_getById', methods: ['GET'])]
+    public function getCartsById(int $id, CartRepository $cartRepository, SerializerInterface $serializer): JsonResponse
     {
-        $user = $this->getUser();
-
-        if (!$user) {
-            return new JsonResponse(['message' => 'User not authenticated'], Response::HTTP_UNAUTHORIZED);
+        $cart = $cartRepository->find($id);
+        if($cart){
+            $jsonCart = $serializer->serialize($cart, 'json', ['groups' => 'getCarts']);
+            return new JsonResponse($jsonCart, Response::HTTP_OK, [], true);
         }
-
-        $cart = $user->getCart();
-
-        if (!$cart || !$cart->getProducts()->contains($product)) {
-            return new JsonResponse(['message' => 'Product not found in the cart'], Response::HTTP_NOT_FOUND);
-        }
-
-        $cart->removeProduct($product);
-        $this->getDoctrine()->getManager()->flush();
-
-        return new JsonResponse(['message' => 'Product removed from cart successfully']);
+        return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
 
-    #[Route('/api/carts', name: 'get_cart', methods: ['GET'])]
-    public function getCart(): JsonResponse
-    {
-        $user = $this->getUser();
+    //ROUTE POUR PUT UN CART
+    #[Route('/api/carts/{id}', name: 'carts_put', methods: ['PUT'])]
+    public function updateCart(Request $request, SerializerInterface $serializer, Cart $currentCart, EntityManagerInterface $em){
+        $updatedCart = $serializer->deserialize($request->getContent(), Cart::class, 'json');
+        $currentCart->setIdUser($updatedCart->getIdUser());
+        $currentCart->addProduct($updatedCart->getProducts());
+        
+        $em->flush();
 
-        if (!$user) {
-            return new JsonResponse(['message' => 'User not authenticated'], Response::HTTP_UNAUTHORIZED);
-        }
-
-        $cart = $user->getCart();
-
-        if (!$cart) {
-            return new JsonResponse(['message' => 'Cart is empty']);
-        }
-
-        $products = $cart->getProducts();
-
-        return new JsonResponse(['products' => $products]);
+        return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+        
     }
 
-    #[Route('/api/carts/validate', name: 'validate_cart', methods: ['POST'])]
-    public function validateCart(): JsonResponse
+    //ROUTE POUR POST UN CART
+    #[Route('/api/carts', name: 'carts_post', methods: ['POST'])]
+    public function createCart(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator): JsonResponse 
     {
-        $user = $this->getUser();
+        $cart = $serializer->deserialize($request->getContent(), Cart::class, 'json');
+        $em->persist($cart);
+        $em->flush();
+        return new JsonResponse(null, Response::HTTP_CREATED, ['Location' => $urlGenerator->generate('carts_getById', ['id' => $cart->getId()])]);
+    }
 
-        if (!$user) {
-            return new JsonResponse(['message' => 'User not authenticated'], Response::HTTP_UNAUTHORIZED);
-        }
-
-        $cart = $user->getCart();
-
-        if (!$cart || $cart->getProducts()->isEmpty()) {
-            return new JsonResponse(['message' => 'Cart is empty'], Response::HTTP_BAD_REQUEST);
-        }
-
-        // Perform cart validation logic here
-
-        // Clear the cart after validation
-        $cart->getProducts()->clear();
-        $this->getDoctrine()->getManager()->flush();
-
-        return new JsonResponse(['message' => 'Cart validated and cleared successfully']);
+    //ROUTE POUR DELETE UN CART
+    #[Route('/api/carts/{id}', name: 'carts_delete', methods: ['DELETE'])]
+    public function deleteCart(Cart $cart, EntityManagerInterface $em): JsonResponse
+    {
+        $em->remove($cart);
+        $em->flush();
+        return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
 }

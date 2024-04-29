@@ -20,30 +20,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]   
-    #[Groups(["getMe"])]
+    #[Groups(["getMe", "getUsers"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(["getMe"])]
+    #[Groups(["getMe", "getUsers"])]
     private ?string $login = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(["getMe"])]
+    #[Groups(["getMe", "getUsers"])]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(["getMe"])]
+    #[Groups(["getMe", "getUsers"])]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 180)]
-    #[Groups(["getMe"])]
+    #[Groups(["getMe", "getUsers"])]
     private ?string $email = null;
 
     /**
      * @var list<string> The user roles
      */
     #[ORM\Column]
-    #[Groups(["getMe"])]
+    #[Groups(["getMe", "getUsers"])]
     private array $roles = [];
 
     /**

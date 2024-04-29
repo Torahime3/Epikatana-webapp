@@ -16,15 +16,15 @@ class Order
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(["getMe"])]
+    #[Groups(["getMe", "getOrders"])]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::FLOAT)]
-    #[Groups(["getMe"])]
+    #[Groups(["getMe", "getOrders"])]
     private ?float $totalPrice = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Groups(["getMe"])]
+    #[Groups(["getMe", "getOrders"])]
     private ?\DateTimeInterface $creationDate = null;
 
     #[ORM\ManyToOne(inversedBy: 'orders')]
@@ -35,7 +35,7 @@ class Order
      * @var Collection<int, Product>
      */
     #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'orders')]
-    #[Groups(["getMe"])]
+    #[Groups(["getMe", "getOrders"])]
     private Collection $products;
 
     public function __construct()

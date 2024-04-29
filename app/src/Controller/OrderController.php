@@ -21,7 +21,7 @@ class OrderController extends AbstractController
     public function getOrdersList(OrderRepository $orderRepository, SerializerInterface $serializer): JsonResponse
     {
         $orders = $orderRepository->findAll();
-        $jsonOrders = $serializer->serialize($orders, 'json');
+        $jsonOrders = $serializer->serialize($orders, 'json', ['groups' => 'getOrders']);
         return new JsonResponse($jsonOrders, Response::HTTP_OK, [], true);
     }
 
@@ -31,7 +31,7 @@ class OrderController extends AbstractController
     {
         $order = $orderRepository->find($id);
         if($order){
-            $jsonOrder = $serializer->serialize($order, 'json');
+            $jsonOrder = $serializer->serialize($order, 'json', ['groups' => 'getOrders']);
             return new JsonResponse($jsonOrder, Response::HTTP_OK, [], true);
         }
         return new JsonResponse(null, Response::HTTP_NOT_FOUND);
@@ -43,7 +43,7 @@ class OrderController extends AbstractController
         $updatedOrder = $serializer->deserialize($request->getContent(), Order::class, 'json');
         $currentOrder->setTotalPrice($updatedOrder->getTotalPrice());
         $currentOrder->setCreationDate($updatedOrder->getCreationDate());
-        $currentOrder->setProducts($updatedOrder->getProducts());
+        $currentOrder->addProduct($updatedOrder->getProducts());
         
         $em->flush();
 

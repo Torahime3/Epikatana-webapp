@@ -15,23 +15,23 @@ class Product
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(["getMe"])]
+    #[Groups(["getMe", "getProducts", "getCarts", "getOrders"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(["getMe"])]
+    #[Groups(["getMe", "getProducts", "getCarts", "getOrders"])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(["getMe"])]
+    #[Groups(["getMe", "getProducts", "getCarts", "getOrders"])]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(["getMe"])]
+    #[Groups(["getMe", "getProducts", "getCarts", "getOrders"])]
     private ?string $photo = null;
 
     #[ORM\Column]
-    #[Groups(["getMe"])]
+    #[Groups(["getMe", "getProducts", "getCarts", "getOrders"])]
     private ?float $price = null;
 
     /**
