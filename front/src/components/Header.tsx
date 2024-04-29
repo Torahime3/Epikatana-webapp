@@ -15,7 +15,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ title }) => {
-  const [cookies, setCookie, removeCookie] = useCookies(['userToken']); // Get the userToken cookie and removeCookie function
+  const [cookies, setCookie, removeCookie] = useCookies(['userToken']);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -29,8 +29,8 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
   const handleLogout = () => {
     // Remove the userToken cookie
     removeCookie('userToken');
-    // Redirect to the login page or any other desired page after logout
-    window.location.href = '/login'; // Change the URL as needed
+    // Redirect to the login page
+    window.location.href = '/login';
   };
 
   return (
