@@ -1,11 +1,11 @@
 import React from 'react';
-import '../styles/Register.css';
+import '../styles/Authentication.css';
 import { useCookies } from 'react-cookie';
 
 const Authentication: React.FC = () => {
 
   const [cookies, setCookies] = useCookies(['userToken']);
-  const [registration, setRegistration] = React.useState(true);
+  const [registration, setRegistration] = React.useState(false);
   const [form, setForm] = React.useState({
     firstName: '',
     lastName: '',
@@ -92,7 +92,7 @@ const Authentication: React.FC = () => {
   }
 
   return (
-    <div className='container'>
+    <div className="register_container">
 
       <div className="box register">
 

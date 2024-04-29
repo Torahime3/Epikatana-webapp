@@ -7,6 +7,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Menu from '@mui/material/Menu';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import '../styles/Header.css';
+import { useCookies } from 'react-cookie';
 
 interface HeaderProps {
   title: string;
@@ -14,6 +15,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ title }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [cookies] = useCookies(['userToken']);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -65,6 +67,11 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
             <a href="/products" className="header-menu-link" onClick={handleClose}>Nos produits</a>
             <a href="/business" className="header-menu-link" onClick={handleClose}>Qui sommes nous</a>
             <a href="/login" className="header-menu-link" onClick={handleClose}>Connexion</a>
+            {cookies.userToken !== undefined ? (
+              <a href="/profile" className="header-menu-link" onClick={handleClose}>Profile</a>
+            ) : (
+              <a href="/login" className="header-menu-link" onClick={handleClose}>Profile</a>
+            )}
           </Menu>
         </div>
       </Toolbar>

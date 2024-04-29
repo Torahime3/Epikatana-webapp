@@ -4,7 +4,9 @@ import Home from './pages/Home';
 import Products from './pages/Products';
 import Authentication from './pages/Authentication';
 import Business from './pages/Business';
+import Profile from './pages/Profile';
 import './App.css';
+
 
 
 function App() {
@@ -17,6 +19,7 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/business" element={<Business />} />
           <Route path="/login" element={<Authentication />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </Router>
