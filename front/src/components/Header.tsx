@@ -7,6 +7,7 @@ const Header = () => {
 
   const [cookies] = useCookies(['userToken']);
 
+
   return (
     <div className="header">
       <div className="logo">
@@ -24,7 +25,7 @@ const Header = () => {
         </ul>
       </nav>
       <div className="header_cart">
-        <Cart/>
+        <a href='/carts'><Cart/></a>
       </div>
     </div>
   );

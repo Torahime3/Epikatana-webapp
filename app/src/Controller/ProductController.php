@@ -45,16 +45,16 @@ class ProductController extends AbstractController
         $currentProduct->setDescription($updatedProduct->getDescription());
         $currentProduct->setPhoto($updatedProduct->getPhoto());
         $currentProduct->setPrice($updatedProduct->getPrice());
-        
+
         $em->flush();
 
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
-        
+
     }
 
     // ROUTE POUR POST UN PRODUCT
     #[Route('/api/products', name: 'products_post', methods: ['POST'])]
-    public function createBook(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator): JsonResponse 
+    public function createBook(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator): JsonResponse
     {
         $product = $serializer->deserialize($request->getContent(), Product::class, 'json');
         $em->persist($product);
@@ -63,14 +63,32 @@ class ProductController extends AbstractController
         $jsonProduct = $serializer->serialize($product, 'json');
         return new JsonResponse($jsonProduct, Response::HTTP_CREATED, ['Location' => $urlGenerator->generate('products_getById', ['id' => $product->getId()])], true);
     }
-    
+
     // ROUTE POUR DELETE UN PRODUCT
     #[Route('/api/products/{id}', name: 'products_delete', methods: ['DELETE'])]
-    public function deleteProduct(Product $product, EntityManagerInterface $em): JsonResponse 
+    public function deleteProduct(Product $product, EntityManagerInterface $em): JsonResponse
     {
         $em->remove($product);
         $em->flush();
 
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+    }
+
+    // ROUTE POUR AJOUTER UN PRODUIT AU PANIER
+    #[Route('/api/products/{id}/add-to-cart', name: 'add_to_cart', methods: ['POST'])]
+    public function addToCart(Product $product, EntityManagerInterface $em): JsonResponse
+    {
+
+
+        return new JsonResponse(null, Response::HTTP_OK);
+    }
+
+    //ROUTE POUR SUPPRIMER UN PRODUIT DU PANIER
+    #[Route('/api/product/{id}/remove-from-cart', name: 'remove_from_cart', methods: ['POST'])]
+    public function removeFromCart(Product $product, EntityManagerInterface $em): JsonResponse
+    {
+
+
+        return new JsonResponse(null, Response::HTTP_OK);
     }
 }

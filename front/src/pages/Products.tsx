@@ -1,5 +1,5 @@
 import { useProducts } from '../hooks/fetchProducts';
-import '../styles/ProductsList.css'; 
+import '../styles/ProductsList.css';
 import Product from '../components/Product';
 
 

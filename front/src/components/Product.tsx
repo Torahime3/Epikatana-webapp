@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 
 interface ProductProps {
   id: number;
@@ -10,6 +10,17 @@ interface ProductProps {
 }
 
 const Product: React.FC<ProductProps> = ({ id, name, description, price, photo }) => {
+
+  // Fonction pour ajouter un produit au panier
+  const addToCart = async () => {
+
+  };
+
+  // Fonction pour supprimer un produit du panier
+  const removeFromCart = async () => {
+
+  };
+
   return (
     <div key={id} className="product-card">
       {photo && (
@@ -22,7 +33,12 @@ const Product: React.FC<ProductProps> = ({ id, name, description, price, photo }
         <Link to={`/products/${id}`} className="product-button-see" target="_blank">
           Afficher les détails
         </Link>
-        <button className="product-button-addtocart">Ajouter au panier</button>
+        <button className="product-button-addtocart" onClick={addToCart}>
+          Ajouter au panier
+        </button>
+        <button className="product-button-removefromcart" onClick={removeFromCart}>
+          Retirer du panier
+        </button>
       </div>
     </div>
   );
