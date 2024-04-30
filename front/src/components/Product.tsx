@@ -1,4 +1,7 @@
-interface Product {
+import React from 'react';
+import { Link } from 'react-router-dom'; 
+
+interface ProductProps {
   id: number;
   name: string;
   description: string;
@@ -6,20 +9,23 @@ interface Product {
   photo: string;
 }
 
-const Product = (product: Product) => {
-
-  console.log(product);
-    return (
-        <div key={product.id} className="product-card">
-            <h2>{product.name}</h2>
-            <p>Description : {product.description}</p>
-            <p>Prix : {product.price}</p>
-            {product.photo && (
-                <img src={product.photo} alt={product.name} />
-          )}
-        </div>
-    )
-
-}
+const Product: React.FC<ProductProps> = ({ id, name, description, price, photo }) => {
+  return (
+    <div key={id} className="product-card">
+      {photo && (
+        <img src={photo} alt={name} />
+      )}
+      <p className="product-type">Katana Japonais</p>
+      <h2 className="product-name">{name}</h2>
+      <p className="product-price"> A partir de {price}€</p>
+      <div className="product-options">
+        <Link to={`/products/${id}`} className="product-button-see" target="_blank">
+          Afficher les détails
+        </Link>
+        <button className="product-button-addtocart">Ajouter au panier</button>
+      </div>
+    </div>
+  );
+};
 
 export default Product;

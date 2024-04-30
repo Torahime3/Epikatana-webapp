@@ -6,13 +6,15 @@
 }
 
 .profile_wrapper{
+    margin-top: 20px;
     display: grid;
     grid-template-columns: 1fr 2fr;
     width: clamp(300px, 80%, 1000px);
 }
 
 .profile_section{
-    background-color: rgb(223, 237, 255);
+    background-color: rgb(248, 248, 248);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
     padding: 20px;
     margin: 10px;
     border-radius: 10px;
