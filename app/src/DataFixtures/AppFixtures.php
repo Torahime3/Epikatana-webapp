@@ -50,6 +50,16 @@ class AppFixtures extends Fixture
         $cartSteven->setIdUser($userSteven);
         $manager->persist($userSteven);
 
+        $userSaid = new User();
+        $userSaid->setLogin('saidsouidi');
+        $userSaid->setFirstname('Said');
+        $userSaid->setLastName('Souidi');
+        $userSaid->setEmail('said.souidi@epitech.eu');
+        $userSaid->setRoles(['ROLE_USER']);
+        $userSaid->setPassword($this->userPasswordHasher->hashPassword($userSaid
+        , 'password'));
+        $manager->persist($userSaid);
+
         // Create 30 product
         for ($i = 0; $i < mt_rand(5, 30); $i++) {
             $product = new Product();
