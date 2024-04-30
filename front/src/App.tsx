@@ -7,8 +7,8 @@ import OrderDetails from './pages/OrderDetails';
 import Authentication from './pages/Authentication';
 import Business from './pages/Business';
 import Profile from './pages/Profile';
+import Carts from './pages/Carts';
 import './App.css';
-
 
 
 function App() {
@@ -24,6 +24,7 @@ function App() {
           <Route path="/business" element={<Business />} />
           <Route path="/login" element={<Authentication />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/carts" element={<Carts />} />
         </Routes>
       </div>
     </Router>

@@ -25,7 +25,7 @@ const Header = () => {
         </ul>
       </nav>
       <div className="header_cart">
-        <Cart/>
+        <a href='/carts'><Cart/></a>
       </div>
     </div>
   );

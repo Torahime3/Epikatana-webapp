@@ -14,8 +14,12 @@ const Profile = () => {
 
     let { data: user, isLoading, error } = useMe(cookies.userToken);
 
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>An error occurred: {error.message}</div>;
+    if (isLoading) return <div>Loading...</div> && <div className="profile_logout">
+    <button onClick={handleLogout}>Se déconnecter</button>
+</div>;
+    if (error) return <div>An error occurred: {error.message}</div> && <div className="profile_logout">
+    <button onClick={handleLogout}>Se déconnecter</button>
+</div>;
 
     if(user === null){
         return (
