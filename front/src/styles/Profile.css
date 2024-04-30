@@ -34,3 +34,13 @@
 .order-details{
     margin-left: 20px;
 }
+
+.profile_logout button {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

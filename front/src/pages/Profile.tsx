@@ -3,10 +3,17 @@ import { useMe } from "../hooks/fetchMe";
 import "../styles/Profile.css";
 
 const Profile = () => {
-    const [cookies] = useCookies(['userToken']);
+    const [cookies, setCookie, removeCookie] = useCookies(['userToken']);
+
+    const handleLogout = () => {
+        // Remove the userToken cookie
+        removeCookie('userToken');
+        // Redirect to the login page
+        window.location.href = '/login';
+      };
 
     let { data: user, isLoading, error } = useMe(cookies.userToken);
-        
+
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>An error occurred: {error.message}</div>;
 
@@ -63,12 +70,15 @@ const Profile = () => {
                                 </details>
                                 <p><br /></p>
                             </li>
-                            
+
                         ))}
-                        
+
                     </ul>
                 </div>
 
+            </div>
+            <div className="profile_logout">
+                <button onClick={handleLogout}>Se déconnecter</button>
             </div>
         </div>
     )
