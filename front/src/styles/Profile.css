@@ -25,3 +25,12 @@
 .profile_section:nth-child(2){
     height: 400px;
 }
+
+.profile_section:nth-child(3){
+    height: 400px;
+    overflow-y: scroll;
+}
+
+.order-details{
+    margin-left: 20px;
+}

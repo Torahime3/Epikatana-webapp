@@ -44,9 +44,28 @@ const Profile = () => {
                 <div className="profile_section">
                     <h1>Mes commandes</h1>
                     <ul>
-                        <li>Commande 1</li>
-                        <li>Commande 2</li>
-                        <li>Commande 3</li>
+                        {user.orders.map((order: any) => (
+                            <li key={order.id}>
+                                <p>Commande n°{order.id}</p>
+                                <p>Date : {order.creationDate}</p>
+                                <p>Montant : {order.totalPrice} €</p>
+                                <details>
+                                    <summary>Détails de la commande</summary>
+                                    <ul className="order-details">
+                                        {order.products.map((product: any) => (
+                                            <li key={product.id}>
+                                                <p>{product.name}</p>
+                                                <p>{product.description}</p>
+                                                <p>Prix : {product.price} €</p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </details>
+                                <p><br /></p>
+                            </li>
+                            
+                        ))}
+                        
                     </ul>
                 </div>
 

@@ -15,7 +15,7 @@ function App() {
   return (
     <Router>
       <div>
-        <Header title="Epikatana" />
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
