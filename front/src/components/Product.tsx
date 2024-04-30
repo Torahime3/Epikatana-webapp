@@ -1,8 +1,7 @@
-import '../styles/ProductsList.css'; 
-import { BiCartAdd } from "react-icons/bi";
+import React from 'react';
+import { Link } from 'react-router-dom'; 
 
-
-interface Product {
+interface ProductProps {
   id: number;
   name: string;
   description: string;
@@ -10,24 +9,23 @@ interface Product {
   photo: string;
 }
 
-const Product = (product: Product) => {
-
-  console.log(product);
-    return (
-        <div key={product.id} className="product-card">
-          {product.photo && (
-                <img src={product.photo} alt={product.name} />
-          )}
-          <p className="product-type">Katana Japonais</p>
-          <h2 className="product-name">{product.name}</h2>
-          <p className="product-price"> A partir de {product.price}€</p>
-          <div className="product-options">
-            <button className="product-button-see">Afficher les détails</button>
-            <button className="product-button-addtocart"><BiCartAdd /></button>
-          </div>
-        </div>
-    )
-
-}
+const Product: React.FC<ProductProps> = ({ id, name, description, price, photo }) => {
+  return (
+    <div key={id} className="product-card">
+      {photo && (
+        <img src={photo} alt={name} />
+      )}
+      <p className="product-type">Katana Japonais</p>
+      <h2 className="product-name">{name}</h2>
+      <p className="product-price"> A partir de {price}€</p>
+      <div className="product-options">
+        <Link to={`/products/${id}`} className="product-button-see" target="_blank">
+          Afficher les détails
+        </Link>
+        <button className="product-button-addtocart">Ajouter au panier</button>
+      </div>
+    </div>
+  );
+};
 
 export default Product;

@@ -8,6 +8,7 @@ import Authentication from './pages/Authentication';
 import Business from './pages/Business';
 import Profile from './pages/Profile';
 import './App.css';
+import ProductDetailsPage from './pages/ProductsDetails';
 
 
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/business" element={<Business />} />
           <Route path="/login" element={<Authentication />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/products/:id" element={<ProductDetailsPage />} />
         </Routes>
       </div>
     </Router>
