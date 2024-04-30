@@ -14,7 +14,7 @@ class AppFixtures extends Fixture
 {
 
     private $userPasswordHasher;
-    
+
     public function __construct(UserPasswordHasherInterface $userPasswordHasher)
     {
         $this->userPasswordHasher = $userPasswordHasher;
@@ -35,7 +35,7 @@ class AppFixtures extends Fixture
         $cartNathan = new Cart();
         $cartNathan->setIdUser($userNathan);
         $manager->persist($userNathan);
-    
+
 
         // Create Steven Dorion user
         $userSteven = new User();
@@ -75,7 +75,7 @@ class AppFixtures extends Fixture
             if (mt_rand(0, 1) === 1) {
                 $cartSteven->addProduct($product);
             }
-            
+
             $manager->persist($product);
         }
 
@@ -118,5 +118,6 @@ class AppFixtures extends Fixture
         $manager->persist($cartNathan);
         $manager->persist($cartSteven);
         $manager->flush();
+
     }
 }
