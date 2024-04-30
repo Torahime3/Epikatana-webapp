@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 interface ProductProps {
@@ -14,24 +13,12 @@ const Product: React.FC<ProductProps> = ({ id, name, description, price, photo }
 
   // Fonction pour ajouter un produit au panier
   const addToCart = async () => {
-    try {
-      await axios.post(`/api/products/${id}/add-to-cart`);
-      alert('Product added to cart');
-    } catch (error) {
-      console.error('Error adding product to cart:', error);
-      alert('Failed to add product to cart');
-    }
+
   };
 
   // Fonction pour supprimer un produit du panier
   const removeFromCart = async () => {
-    try {
-      await axios.post(`/api/products/${id}/remove-from-cart`);
-      alert('Product removed from cart');
-    } catch (error) {
-      console.error('Error removing product from cart:', error);
-      alert('Failed to remove product from cart');
-    }
+
   };
 
   return (

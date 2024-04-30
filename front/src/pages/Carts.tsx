@@ -11,7 +11,6 @@ const Carts: React.FC = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   // Calculate total price
-
   const totalPrice = cartItems.reduce((acc, item) => acc + item.product.price, 0);
 
   return (
