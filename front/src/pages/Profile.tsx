@@ -21,7 +21,7 @@ const Profile = () => {
     <button onClick={handleLogout}>Se déconnecter</button>
 </div>;
 
-    if(user === null){
+    if(user === undefined){
         return (
             <div className="profile_container">
                 <div className="profile_wrapper">
@@ -56,6 +56,7 @@ const Profile = () => {
                     <h1>Mes commandes</h1>
                     <ul>
                         {user.orders.map((order: any) => (
+                            <div className="order-container">
                             <li key={order.id}>
                                 <p>Commande n°{order.id}</p>
                                 <p>Date : {order.creationDate}</p>
@@ -72,14 +73,15 @@ const Profile = () => {
                                         ))}
                                     </ul>
                                 </details>
-                                <p><br /></p>
                             </li>
-
+                          
+                            </div>
                         ))}
-
+                      
                     </ul>
+                  
                 </div>
-
+              
             </div>
             <div className="profile_logout">
                 <button onClick={handleLogout}>Se déconnecter</button>
