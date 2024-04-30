@@ -66,7 +66,7 @@ class AppFixtures extends Fixture
             $product->setName('Product ' . $i);
             $product->setPrice(mt_rand(10, 100));
             $product->setDescription('Description of product ' . $i);
-            $product->setPhoto('https://www.konjaku.fr/media/42392/vrai-katana-1.jpg');
+            $product->setPhoto('https://i0.wp.com/monkatana.fr/wp-content/uploads/2022/08/Blueandwhiteporcelainkatana-d-d-e-e-e-b-ea-ff.jpg');
 
             if (mt_rand(0, 1) === 1) {
                 $cartNathan->addProduct($product);
