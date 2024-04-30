@@ -75,21 +75,19 @@ class ProductController extends AbstractController
     }
 
     // ROUTE POUR AJOUTER UN PRODUIT AU PANIER
-    #[Route('/api/cart/add/{id}', name: 'add_to_cart', methods: ['POST'])]
+    #[Route('/api/products/{id}/add-to-cart', name: 'add_to_cart', methods: ['POST'])]
     public function addToCart(Product $product, EntityManagerInterface $em): JsonResponse
     {
-        $product->setCart(true);
-        $em->flush();
+
 
         return new JsonResponse(null, Response::HTTP_OK);
     }
 
     //ROUTE POUR SUPPRIMER UN PRODUIT DU PANIER
-    #[Route('/api/cart/remove/{id}', name: 'remove_from_cart', methods: ['POST'])]
+    #[Route('/api/product/{id}/remove-from-cart', name: 'remove_from_cart', methods: ['POST'])]
     public function removeFromCart(Product $product, EntityManagerInterface $em): JsonResponse
     {
-        $product->setCart(false);
-        $em->flush();
+
 
         return new JsonResponse(null, Response::HTTP_OK);
     }

@@ -16,9 +16,9 @@ const Carts: React.FC = () => {
 
   return (
     <div className="cart-container">
-      <h1>Your Cart</h1>
+      <h1>Votre panier</h1>
       {cartItems.length === 0 ? (
-        <p>Cart is empty</p>
+        <p>Le panier est vide</p>
       ) : (
         cartItems.map((item) => (
           <Product
@@ -36,7 +36,7 @@ const Carts: React.FC = () => {
           <div className="cart-total">
             Total: {totalPrice} €
           </div>
-          <button className="validate-cart-button">Validate Cart</button>
+          <button className="validate-cart-button">Valider le panier</button>
         </>
       )}
     </div>
