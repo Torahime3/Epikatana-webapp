@@ -82,4 +82,16 @@ class CartController extends AbstractController
         $em->flush();
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
+
+    //ROUTE POUR AJOUTER UN PRODUIT DANS LE CART
+    #[Route('/api/carts/{productId}', name: 'carts_addProduct', methods: ['POST'])]
+    public function addProductToCart(int $productId, CartRepository $cartRepository, EntityManagerInterface $em): JsonResponse
+    {
+        $user = $this->getUser();
+        $cart = $cartRepository->findOneBy(['idUser' => $user->getId()]);
+        $product = $em->getRepository(Product::class)->find($productId);
+        $cart->addProduct($product);
+        $em->flush();
+        return new JsonResponse(null, Response::HTTP_CREATED);
+    }
 }
