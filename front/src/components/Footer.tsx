@@ -5,7 +5,7 @@ const Footer = () => {
     <footer>
       <p>&copy; Epikatana 2024</p>
     </footer>
-  );
+  )
 }
 
 export default Footer;
