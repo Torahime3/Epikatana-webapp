@@ -17,8 +17,24 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
+
 class CartController extends AbstractController
 {
+
+
+    //ROUTE POUR DELETE UN PRODUIT DANS LE CART
+    #[Route('/api/carts/{productId}', name: 'carts_deleteProduct', methods: ['DELETE'])]
+    public function deleteProductFromCart(int $productId, CartRepository $cartRepository, EntityManagerInterface $em): JsonResponse
+    {
+        $user = $this->getUser();
+        $cart = $cartRepository->findOneBy(['idUser' => $user->getId()]);
+        $product = $em->getRepository(Product::class)->find($productId);
+        $cart->removeProduct($product);
+        $em->flush();
+        return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+    }
+
+
     // ROUTE POUR GET TOUS LES CARTS
     #[Route('/api/carts', name: 'carts_getAll', methods: ['GET'])]
     public function getCartsList(CartRepository $cartRepository, SerializerInterface $serializer): JsonResponse
@@ -83,6 +99,7 @@ class CartController extends AbstractController
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
 
+
     //ROUTE POUR AJOUTER UN PRODUIT DANS LE CART
     #[Route('/api/carts/{productId}', name: 'carts_addProduct', methods: ['POST'])]
     public function addProductToCart(int $productId, CartRepository $cartRepository, EntityManagerInterface $em): JsonResponse
@@ -94,4 +111,6 @@ class CartController extends AbstractController
         $em->flush();
         return new JsonResponse(null, Response::HTTP_CREATED);
     }
+
+   
 }

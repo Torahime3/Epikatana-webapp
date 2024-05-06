@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { BiCartAdd } from 'react-icons/bi';
+import { BiSolidTrash } from "react-icons/bi";
+import { useCookies } from 'react-cookie';
+
 
 interface ProductProps {
   id: number;
@@ -13,6 +16,32 @@ interface ProductProps {
 
 const Product = ({ id, name, description, price, photo, viewInACart = false }: ProductProps) => {
 
+  const [cookies] = useCookies(['userToken']);
+
+  const handleDelete = () => {
+    console.log(id);
+    // /api/carts/{productId}
+    fetch(`https://localhost:8000/api/carts/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `bearer ${cookies.userToken}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Une erreur est survenue');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => { 
+        console.error(error);
+      });
+  }
+
   if(viewInACart){
     return (
       <>
@@ -20,10 +49,11 @@ const Product = ({ id, name, description, price, photo, viewInACart = false }: P
           <img src={photo} alt={name} />
           <div className="productInCart-details">
             <p className="product-type">Katana Japonais</p>
-            <h2>{name}</h2>
+            <h2>{name} {id}</h2>
             <p>{description}</p>
             <p>{price}€</p>
           </div>
+          <button className="productinCart-delete" onClick={handleDelete}> <BiSolidTrash/> </button>
         </div>
       </>
     )

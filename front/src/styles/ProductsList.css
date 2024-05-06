@@ -38,6 +38,19 @@
   flex-direction: column;
 }
 
+.productinCart-delete {
+  background-color: #ff4d4d;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: white;
+  font-weight: 600;
+  margin-left: auto;
+
+}
+
 .product-card:hover{
   scale: 1.02;
   
