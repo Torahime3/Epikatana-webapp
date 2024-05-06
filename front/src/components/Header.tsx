@@ -1,6 +1,7 @@
 import { useCookies } from 'react-cookie';
 import '../styles/Header.css';
 import Cart from './Cart';
+import { Link } from 'react-router-dom';
 
 
 const Header = () => {
@@ -15,17 +16,24 @@ const Header = () => {
       </div>
       <nav>
         <ul className="header_navbar">
-          <li><a href="/products">Nos produits</a></li>
-          <li><a href="/business">Qui sommes nous</a></li>
+          <li>
+            <Link to={`/`}>Accueil</Link>
+          </li>
+          <li>
+            <Link to={`/products`}>Nos produits</Link>
+          </li>
+           <li>
+            <Link to={`/business`}>Qui sommes nous</Link>
+          </li>
           <li>{cookies.userToken !== undefined ? (
-            <a href="/profile">Profile</a>
+            <Link to={`/profile`}>Profile</Link>
           ) : (
-            <a href="/login">Connexion</a>
+            <Link to={`/login`}>Connexion</Link>
           )}</li>
         </ul>
       </nav>
       <div className="header_cart">
-        <a href='/carts'><Cart/></a>
+        <Link to={`/carts`}><Cart/></Link>
       </div>
     </div>
   );

@@ -11,12 +11,12 @@ interface ProductDetailsProps {
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ name, description, price, photo }) => {
   return (
-    <div className="product-details-container"> 
+    <>
       <img className="product-image" src={photo} alt={name} /> 
       <h2 className="product-name">{name}</h2>
       <p className="product-description">{description}</p> 
       <p className="product-price">Price: {price}€</p>
-    </div>
+    </>
   );
 };
 

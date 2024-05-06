@@ -15,6 +15,29 @@
   transition: scale 0.1s;  
 }
 
+.productInCart-card{
+  display: flex;
+  margin-top: 20px;
+  width: calc(100% - 20px);
+  padding: 20px;
+  border-radius: 20px;
+  border: 2px solid rgb(207, 207, 207);
+  align-items: center;
+}
+
+.productInCart-card img{
+  width: 100px;
+  height: fit-content;
+  border-radius: 10px;
+  margin-right: 10px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.productInCart-details{
+  display: flex;
+  flex-direction: column;
+}
+
 .product-card:hover{
   scale: 1.02;
   

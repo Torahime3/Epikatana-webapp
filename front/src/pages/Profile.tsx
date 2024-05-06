@@ -1,6 +1,7 @@
 import { useCookies } from "react-cookie";
 import { useMe } from "../hooks/fetchMe";
 import "../styles/Profile.css";
+import { useState } from "react";
 
 const Profile = () => {
     const [cookies, setCookie, removeCookie] = useCookies(['userToken']);
@@ -11,6 +12,7 @@ const Profile = () => {
       };
 
     let { data: user, isLoading, error } = useMe(cookies.userToken);
+    const[showOrders, setShowOrders] = useState(true);
 
     if (isLoading) return (
             <div>Loading...</div>       
@@ -51,38 +53,42 @@ const Profile = () => {
 
                 <div className="profile_section">
                     <ul>
-                        <li>Commandes</li>
-                        <li>Mes infos</li>
+                        <li onClick={() => setShowOrders(true)} className="button_profile">Commandes</li>
+                        <li onClick={() => setShowOrders(false)} className="button_profile">Mes infos</li>
                     </ul>
                 </div>
 
                 <div className="profile_section">
-                    <h1>Mes commandes</h1>
-                    <ul>
-                        {user.orders.map((order: any) => (
-                            <div className="order-container">
-                            <li key={order.id}>
-                                <p>Commande n°{order.id}</p>
-                                <p>Date : {order.creationDate}</p>
-                                <p>Montant : {order.totalPrice} €</p>
-                                <details>
-                                    <summary>Détails de la commande</summary>
-                                    <ul className="order-details">
-                                        {order.products.map((product: any) => (
-                                            <li key={product.id}>
-                                                <p>{product.name}</p>
-                                                <p>{product.description}</p>
-                                                <p>Prix : {product.price} €</p>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </details>
-                            </li>
-                          
-                            </div>
-                        ))}
-                      
-                    </ul>
+                    {showOrders ? (
+                        <>
+                        <h1>Mes commandes</h1>
+                            <ul>
+                                {user.orders.map((order: any) => (
+                                    <div className="order-container">
+                                    <li key={order.id}>
+                                        <p>Commande n°{order.id}</p>
+                                        <p>Date : {order.creationDate}</p>
+                                        <p>Montant : {order.totalPrice} €</p>
+                                        <details>
+                                            <summary>Détails de la commande</summary>
+                                            <ul className="order-details">
+                                                {order.products.map((product: any) => (
+                                                    <li key={product.id}>
+                                                        <p>{product.name}</p>
+                                                        <p>{product.description}</p>
+                                                        <p>Prix : {product.price} €</p>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </details>
+                                    </li>
+                                
+                                    </div>
+                                ))}
+                            
+                            </ul>
+                        </>
+                    ) : <p> salut </p>}
                   
                 </div>
               

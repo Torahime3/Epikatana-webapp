@@ -81,6 +81,8 @@ const Authentication: React.FC = () => {
         response.json().then(data => {
           setCookies('userToken', data.token);
           alert('Connexion réussie');
+          window.location.href='/profile';
+
         });
       } else {
         alert('Erreur lors de la connexion');

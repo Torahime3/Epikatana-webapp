@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { BiCartAdd } from 'react-icons/bi';
 
 interface ProductProps {
   id: number;
@@ -7,40 +8,44 @@ interface ProductProps {
   description: string;
   price: number;
   photo: string;
+  viewInACart?: boolean;
 }
 
-const Product: React.FC<ProductProps> = ({ id, name, description, price, photo }) => {
+const Product = ({ id, name, description, price, photo, viewInACart = false }: ProductProps) => {
 
-  // Fonction pour ajouter un produit au panier
-  const addToCart = async () => {
-
-  };
-
-  // Fonction pour supprimer un produit du panier
-  const removeFromCart = async () => {
-
-  };
+  if(viewInACart){
+    return (
+      <>
+        <div className="productInCart-card">
+          <img src={photo} alt={name} />
+          <div className="productInCart-details">
+            <p className="product-type">Katana Japonais</p>
+            <h2>{name}</h2>
+            <p>{description}</p>
+            <p>{price}€</p>
+          </div>
+        </div>
+      </>
+    )
+  }
 
   return (
-    <div key={id} className="product-card">
-      {photo && (
-        <img src={photo} alt={name} />
-      )}
-      <p className="product-type">Katana Japonais</p>
-      <h2 className="product-name">{name}</h2>
-      <p className="product-price"> A partir de {price}€</p>
-      <div className="product-options">
-        <Link to={`/products/${id}`} className="product-button-see" target="_blank">
-          Afficher les détails
-        </Link>
-        <button className="product-button-addtocart" onClick={addToCart}>
-          Ajouter au panier
-        </button>
-        <button className="product-button-removefromcart" onClick={removeFromCart}>
-          Retirer du panier
-        </button>
+      <div key={id} className="product-card">
+        {photo && (
+          <img src={photo} alt={name} />
+        )}
+        <p className="product-type">Katana Japonais</p>
+        <h2 className="product-name">{name}</h2>
+        <p className="product-price"> A partir de {price}€</p>
+        <div className="product-options">
+          <Link to={`/products/${id}`} className="product-button-see">
+            Afficher les détails
+          </Link>
+          <button className="product-button-addtocart">
+            <BiCartAdd />
+          </button>
+        </div>
       </div>
-    </div>
   );
 };
 

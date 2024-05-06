@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Cart;
 use App\Entity\Product;
+use App\Entity\User;
 use App\Repository\CartRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -22,9 +23,19 @@ class CartController extends AbstractController
     #[Route('/api/carts', name: 'carts_getAll', methods: ['GET'])]
     public function getCartsList(CartRepository $cartRepository, SerializerInterface $serializer): JsonResponse
     {
-        $carts = $cartRepository->findAll();
-        $jsonCarts = $serializer->serialize($carts, 'json', ['groups' => 'getCarts']);
-        return new JsonResponse($jsonCarts, Response::HTTP_OK, [], true);
+        // On récupère le cart de l'utilisateur connecté
+        $user = $this->getUser();
+        $cart = $cartRepository->findOneBy(['idUser' => $user->getId()]);
+        if($cart){
+            $jsonCart = $serializer->serialize($cart, 'json', ['groups' => 'getCarts']);
+            return new JsonResponse($jsonCart, Response::HTTP_OK, [], true);
+        } else {
+            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+        }
+
+        // $carts = $cartRepository->findAll();
+        // $jsonCarts = $serializer->serialize($carts, 'json', ['groups' => 'getCarts']);
+        // return new JsonResponse($jsonCarts, Response::HTTP_OK, [], true);
     }
 
 
