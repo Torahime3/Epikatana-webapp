@@ -28,10 +28,10 @@ img {
 }
 
 /* Description */
-p {
+.body p {
   font-size: 1.1em;
   line-height: 1.5;
-  margin-bottom: 20px;
+  margin-bottom: 3em;
 }
 
 /* Animation de chargement */
