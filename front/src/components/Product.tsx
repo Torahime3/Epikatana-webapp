@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { BiCartAdd } from 'react-icons/bi';
+import { BiSolidTrash } from "react-icons/bi";
+import { useCookies } from 'react-cookie';
+
 
 interface ProductProps {
   id: number;
@@ -9,21 +12,53 @@ interface ProductProps {
   price: number;
   photo: string;
   viewInACart?: boolean;
+  removeProductFromCart?: (id: number) => void;
 }
 
-const Product = ({ id, name, description, price, photo, viewInACart = false }: ProductProps) => {
+const Product = ({ id, name, description, price, photo, viewInACart = false, removeProductFromCart}: ProductProps) => {
+
+  const [cookies] = useCookies(['userToken']);
+  const [hiddenClass, setHiddenClass] = React.useState("display");
+
+  const handleDelete = () => {
+    console.log(id);
+    fetch(`https://localhost:8000/api/carts/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `bearer ${cookies.userToken}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Une erreur est survenue');
+        }
+        setHiddenClass("none");
+        removeProductFromCart && removeProductFromCart(id);
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => { 
+        console.error(error);
+      });
+  }
 
   if(viewInACart){
     return (
       <>
+      <div style={{display: hiddenClass}}>
         <div className="productInCart-card">
           <img src={photo} alt={name} />
           <div className="productInCart-details">
             <p className="product-type">Katana Japonais</p>
-            <h2>{name}</h2>
+            <h2>{name} {id}</h2>
             <p>{description}</p>
             <p>{price}€</p>
           </div>
+          <button className="productinCart-delete" onClick={handleDelete}> <BiSolidTrash/> </button>
+        </div>
         </div>
       </>
     )

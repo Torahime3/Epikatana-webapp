@@ -2,12 +2,10 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Product from '../components/Product';
-import { useProducts } from '../hooks/fetchProducts';
 import "../styles/Home.css";
 
 const HomePage: React.FC = () => {
-  const { data: products, isLoading, error } = useProducts();
+
 
   const settings = {
     dots: true,
@@ -16,34 +14,39 @@ const HomePage: React.FC = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 3000,
   };
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>An error occurred: {error.message}</div>;
 
   return (
     <div className="home-page">
-      <header>
-        <h1>Bienvenue sur Epikatana, la référence du katana</h1>
-      </header>
-      <main>
+      <div className="title">
+        <h1>Epikatana, la reference du katana</h1>
+      </div>
+      <div className="body">
         <p>Bienvenue sur Epikatana, votre destination ultime pour trouver le katana parfait. Explorez notre boutique et plongez dans notre vaste collection de pièces uniques et authentiques. Que vous soyez un amateur passionné d'arts martiaux ou un collectionneur chevronné, vous trouverez sûrement votre perle rare ici.</p>
         <div className="slider">
           <Slider {...settings}>
-            {products.map((product) => (
-              <Product
-                key={product.id}
-                id={product.id}
-                name={product.name}
-                description={product.description}
-                price={product.price}
-                photo={product.photo}
-              />
-            ))}
+            <div>
+              <img src="https://images.unsplash.com/photo-1662826321315-c72a74f871c0?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="katana" />
+            </div>
+            <div>
+              <img src="https://images.unsplash.com/photo-1671015522549-e7aa41ded44f?q=80&w=2971&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="katana" />
+            </div>
+            <div>
+              <img src="https://images.unsplash.com/photo-1711725637816-b0755c582c86?q=80&w=3133&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="katana" />
+            </div>
+            <div>
+              <img src="https://images.unsplash.com/photo-1673714220645-674fcab11e62?q=80&w=3155&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="katana" />
+            </div>
+            <div>
+              <img src="https://images.unsplash.com/photo-1713766056256-9cb07ceda9e5?q=80&w=3014&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="katana" />
+            </div>
+            <div>
+              <img src="https://images.unsplash.com/photo-1542367787-4baf35f3037d?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="katana" />
+            </div>
           </Slider>
         </div>
-      </main>
+      </div>
     </div>
   );
 };

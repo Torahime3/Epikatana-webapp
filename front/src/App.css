@@ -4,10 +4,27 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
   text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+}
+
+h1{
+  font-family: 'Japanese Style';
+  letter-spacing: 4px;
 }
 
 body {
       background-color: #e0e0e0;
+}
+
+.bg_image_red{
+  position: absolute;
+  background-image: url('assets/images/wave.png');
+  opacity: 0.2;
+  filter: hue-rotate(190deg);
+  width: 100vw;
+  height: 100vh;
+  background-size: 600px;
+  background-position: center;
+  z-index: -10;
 }

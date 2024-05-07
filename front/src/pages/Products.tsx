@@ -12,7 +12,6 @@ const ProductList = () => {
 
   return (
     <>
-
       <h1 className="title_section"> Nos produits </h1>
       <div className="product-container">
         {products.map((product: Product) => (

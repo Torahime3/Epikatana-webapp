@@ -31,3 +31,13 @@
     margin: 10px;
     border-radius: 10px;
 }
+
+@media screen and (max-width: 768px){
+    .cart_wrapper{
+        display: flex;
+        flex-direction: column;
+    }
+    .products{
+        width: 95.5%;
+    }
+}
