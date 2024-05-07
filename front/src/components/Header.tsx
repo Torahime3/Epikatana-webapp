@@ -22,9 +22,6 @@ const Header = () => {
           <li>
             <Link to={`/products`}>Nos produits</Link>
           </li>
-           <li>
-            <Link to={`/business`}>Qui sommes nous</Link>
-          </li>
           <li>{cookies.userToken !== undefined ? (
             <Link to={`/profile`}>Profile</Link>
           ) : (
