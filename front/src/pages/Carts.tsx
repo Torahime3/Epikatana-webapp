@@ -5,7 +5,7 @@ import Product from "../components/Product";
 import { useEffect, useState } from "react";
 
 const Carts = () => {
-  
+
   const[cookies] = useCookies(["userToken"]);
   const {data: cart, isLoading, error} = useCart(cookies.userToken);
   const[totalPrice, setTotalPrice] = useState(0);
@@ -73,6 +73,7 @@ const Carts = () => {
 
   return (
     <>
+    <div className="bg_image_red"> </div>
       <div className="cart_container">
         <div className="cart_wrapper">
           <div className="cart_section products">

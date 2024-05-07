@@ -8,11 +8,12 @@
 
   .header{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     height: 60px;
     background: var(--primary-color);
     color: white;
+    padding: 1em 2em;
   }
 
 
@@ -32,14 +33,12 @@
 
   .header_navbar li {
     list-style: none;
-    margin: 5px;
-    background-color: var(--primary-color-alternative);
+    margin: 5px 0px;
     padding: 5px;
-    border-radius: 5px;
   }
 
-  .header_navbar li:hover {
-    background-color: var(--hover-background-color);
+  .header_navbar li:not(:last-child) {
+    border-right: 1px solid white; /* Ajoute une bordure droite à tous les éléments sauf le dernier */
   }
 
   .header_navbar a {

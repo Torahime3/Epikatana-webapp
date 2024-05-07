@@ -3,9 +3,10 @@
 /* Styles généraux */
 
 .home-page {
-  max-width: 1200px;
+  width: 60vw;
   margin: auto;
   padding: 20px;
+  height: 100vh;
 }
 
 .title {

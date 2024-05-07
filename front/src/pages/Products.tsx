@@ -12,11 +12,14 @@ const ProductList = () => {
 
   return (
     <>
-      <h1 className="title_section"> Nos produits </h1>
-      <div className="product-container">
-        {products.map((product: Product) => (
-          <Product key={product.id} {...product} />
-        ))}
+      <div className="bg_image_red"> </div>
+      <div className="page_container">
+        <h1 className="title_section"> Nos produits </h1>
+        <div className="product-container">
+          {products.map((product: Product) => (
+            <Product key={product.id} {...product} />
+          ))}
+        </div>
       </div>
     </>
   );
