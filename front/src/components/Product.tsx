@@ -12,15 +12,16 @@ interface ProductProps {
   price: number;
   photo: string;
   viewInACart?: boolean;
+  removeProductFromCart?: (id: number) => void;
 }
 
-const Product = ({ id, name, description, price, photo, viewInACart = false }: ProductProps) => {
+const Product = ({ id, name, description, price, photo, viewInACart = false, removeProductFromCart}: ProductProps) => {
 
   const [cookies] = useCookies(['userToken']);
+  const [hiddenClass, setHiddenClass] = React.useState("display");
 
   const handleDelete = () => {
     console.log(id);
-    // /api/carts/{productId}
     fetch(`https://localhost:8000/api/carts/${id}`, {
       method: 'DELETE',
       headers: {
@@ -32,6 +33,8 @@ const Product = ({ id, name, description, price, photo, viewInACart = false }: P
         if (!response.ok) {
           throw new Error('Une erreur est survenue');
         }
+        setHiddenClass("none");
+        removeProductFromCart && removeProductFromCart(id);
         return response.json();
       })
       .then((data) => {
@@ -45,6 +48,7 @@ const Product = ({ id, name, description, price, photo, viewInACart = false }: P
   if(viewInACart){
     return (
       <>
+      <div style={{display: hiddenClass}}>
         <div className="productInCart-card">
           <img src={photo} alt={name} />
           <div className="productInCart-details">
@@ -54,6 +58,7 @@ const Product = ({ id, name, description, price, photo, viewInACart = false }: P
             <p>{price}€</p>
           </div>
           <button className="productinCart-delete" onClick={handleDelete}> <BiSolidTrash/> </button>
+        </div>
         </div>
       </>
     )
