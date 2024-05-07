@@ -15,10 +15,15 @@
     color: white;
   }
 
+
   .logo{
     font-weight: bold;
     font-size: 1.5rem;
-    font-family: 'Japanese Style', sans-serif !important;
+  }
+
+  .logo p {
+    font-family: 'Japanese Style';
+    letter-spacing: 4px;
   }
 
   .header_navbar{
@@ -58,3 +63,9 @@
     text-decoration: none;
     color: white;
   }
+
+  /* @media screen and (max-width: 768px) {
+    .navbar_desktop {
+      display: none;
+    }
+  } */

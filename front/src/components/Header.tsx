@@ -14,7 +14,7 @@ const Header = () => {
       <div className="logo">
         <p>Epikatana</p>
       </div>
-      <nav>
+      <nav className='navbar_desktop'>
         <ul className="header_navbar">
           <li>
             <Link to={`/`}>Accueil</Link>

@@ -41,6 +41,8 @@ const Profile = () => {
     }
 
     return (
+        <>
+        <div className="bg_image_red"> </div>
         <div className="profile_container">
             <div className="profile_wrapper">
 
@@ -97,6 +99,7 @@ const Profile = () => {
                 <button onClick={handleLogout}>Se déconnecter</button>
             </div>
         </div>
+        </>
     )
 
 }
