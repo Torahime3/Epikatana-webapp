@@ -71,20 +71,19 @@ class UserController extends AbstractController
         return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
 
-    //ROUTE POUR PUT UN USER
-    #[Route('/api/users/{id}', name: 'users_put', methods: ['PUT'])]
-    public function updateUser(Request $request, SerializerInterface $serializer, User $currentUser, EntityManagerInterface $em){
-        $updatedUser = $serializer->deserialize($request->getContent(), User::class, 'json');
-        $currentUser->setLogin($updatedUser->getLogin());
-        $currentUser->setPassword($updatedUser->getPassword());
-        $currentUser->setEmail($updatedUser->getEmail());
-        $currentUser->setFirstname($updatedUser->getFirstname());
-        $currentUser->setLastname($updatedUser->getLastname());
-        
+    //ROUTE POUR PUT UN USER BASE SUR SON TOKEN
+    #[Route('/api/users', name: 'users_put', methods: ['PUT'])]
+    public function updateUser(Request $request, SerializerInterface $serializer, EntityManagerInterface $em): JsonResponse
+    {
+        $user = $this->getUser();
+        $data = json_decode($request->getContent(), true);
+        $user->setFirstname($data['firstname']);
+        $user->setLastname($data['lastname']);
+        $user->setEmail($data['email']);
+        $user->setPassword($this->userPasswordHasher->hashPassword($user, $data['password']));
         $em->flush();
-
-        return new JsonResponse(null, Response::HTTP_NO_CONTENT);
-        
+        $jsonUser = $serializer->serialize($user, 'json', ['groups' => ['getMe']]);
+        return new JsonResponse($jsonUser, Response::HTTP_OK, [], true);
     }
 
     // ROUTE POUR POST UN USER

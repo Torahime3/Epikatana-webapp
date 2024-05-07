@@ -30,6 +30,7 @@ const ProductDetailsPage: React.FC = () => {
 
   const handleAddToCart = (e: any) => {
     e.preventDefault();
+    console.log(form);
 
     fetch(`https://localhost:8000/api/carts/${productId}`, {
       method: 'POST',

@@ -1,11 +1,13 @@
 import React from 'react';
 import '../styles/Authentication.css';
 import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const Authentication: React.FC = () => {
 
   const [cookies, setCookies] = useCookies(['userToken']);
   const [registration, setRegistration] = React.useState(false);
+  const navigate = useNavigate();
   const [form, setForm] = React.useState({
     firstName: '',
     lastName: '',
@@ -80,8 +82,7 @@ const Authentication: React.FC = () => {
       if(response.ok) {
         response.json().then(data => {
           setCookies('userToken', data.token);
-          alert('Connexion réussie');
-          window.location.href='/profile';
+          navigate('/profile')
 
         });
       } else {
