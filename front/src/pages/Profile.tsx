@@ -1,18 +1,88 @@
 import { useCookies } from "react-cookie";
 import { useMe } from "../hooks/fetchMe";
 import "../styles/Profile.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
     const [cookies, setCookie, removeCookie] = useCookies(['userToken']);
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         removeCookie('userToken');
-        window.location.href = '/login';
+        navigate('/login');
       };
 
     let { data: user, isLoading, error } = useMe(cookies.userToken);
     const[showOrders, setShowOrders] = useState(true);
+    const[form, setForm] = useState({
+        firstname: "",
+        lastname: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
+    });
+
+    useEffect(() => {
+        if(user){
+            setForm({
+                firstname: user.firstname,
+                lastname: user.lastname,
+                email: user.email,
+                password: "",
+                confirmPassword: ""
+            });
+        }
+    }, [user]);
+
+    const handleChange = (e: any) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        });
+    }
+
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+
+        if(form.firstname === "" || form.lastname === "" || form.email === "" || form.password === "" || form.confirmPassword === ""){
+            alert("Veuillez remplir tous les champs");
+            return;
+        }
+        
+        if(form.password !== form.confirmPassword){
+            alert("Les mots de passe ne correspondent pas");
+            return;
+        }
+
+        fetch("https://localhost:8000/api/users", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "bearer " + cookies.userToken
+            },
+            body: JSON.stringify(form)
+        }).then(response => {
+            if(response.ok){
+                alert("Vos informations ont été modifiées");
+            } else {
+                alert("Une erreur est survenue");
+            }
+        }
+        )
+
+        console.log(form);
+    }
+
+    const dateParser = (date: string) => {
+        let newDate = new Date(date).toLocaleDateString('fr-FR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        return newDate;
+    }
 
     if (isLoading) return (
             <div>Loading...</div>       
@@ -69,13 +139,13 @@ const Profile = () => {
                                     <div className="order-container">
                                     <li key={order.id}>
                                         <p>Commande n°{order.id}</p>
-                                        <p>Date : {order.creationDate}</p>
+                                        <p>Date : {dateParser(order.creationDate)}</p>
                                         <p>Montant : {order.totalPrice} €</p>
                                         <details>
                                             <summary>Détails de la commande</summary>
-                                            <ul className="order-details">
+                                            <ul>
                                                 {order.products.map((product: any) => (
-                                                    <li key={product.id}>
+                                                    <li key={product.id} className="order-details">
                                                         <p>{product.name}</p>
                                                         <p>{product.description}</p>
                                                         <p>Prix : {product.price} €</p>
@@ -90,7 +160,26 @@ const Profile = () => {
                             
                             </ul>
                         </>
-                    ) : <p> salut </p>}
+                    ) : 
+                    <>
+                    <h1>Mes informations</h1>
+                    <div className="informations_sections">
+                        <label htmlFor="firstname">Prénom</label>
+                        <input type="text" name="firstname" placeholder="Prénom" value={form.firstname} onChange={handleChange}/>
+
+                        <label htmlFor="lastname">Nom</label>
+                        <input type="text" name="lastname" placeholder="Nom" value={form.lastname} onChange={handleChange}/>
+
+                        <label htmlFor="email">Email</label>
+                        <input type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange}/>
+
+                        <label htmlFor="password">Mot de passe</label>
+                        <input type="password"  name="password" value={form.password } onChange={handleChange} placeholder="Mot de passe" />
+                        <input type="password" name="confirmPassword" value={form.confirmPassword}  onChange={handleChange} placeholder="Confirmer mot de passe" />
+                        <button onClick={handleSubmit}>Modifier</button>
+                    </div>
+                    </>
+                    }
                   
                 </div>
               

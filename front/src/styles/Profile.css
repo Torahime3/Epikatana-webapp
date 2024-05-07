@@ -1,7 +1,10 @@
 .order-container{
-    background-color: rgb(234, 234, 234);
+    /* background-color: rgb(234, 234, 234); */
+    border-radius: 5px;
+    border: 1px solid black;
     border-radius: 10px;
     padding: 20px;
+    margin-top: 10px;
 }
 
 .order-container li {
@@ -31,6 +34,30 @@
     border-radius: 10px;
 }
 
+.informations_sections{
+    display: flex;
+    flex-direction: column;
+}
+
+.informations_sections input {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+
+}
+
+.informations_sections button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+
 .button_profile {
     text-align: center;
     border-bottom: 1px black solid;
@@ -54,7 +81,11 @@
 }
 
 .order-details{
-    margin-left: 20px;
+    margin-left: 4px;
+    margin-top: 10px;
+    padding-left: 15px;
+    border-left: 3px solid rgb(205, 205, 205);
+    border-radius: 5px;
 }
 
 .profile_logout button {
