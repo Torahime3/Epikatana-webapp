@@ -44,7 +44,7 @@ const HomePage: React.FC = () => {
                 <img src="https://images.unsplash.com/photo-1713766056256-9cb07ceda9e5?q=80&w=3014&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="katana" />
               </div>
               <div>
-                <img src="https://images.unsplash.com/photo-1542367787-4baf35f3037d?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="katana" />
+                <img src="https://images.unsplash.com/photo-1616102343544-95fa53d0068f?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="katana" />
               </div>
             </Slider>
           </div>
