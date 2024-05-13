@@ -1,0 +1,98 @@
+[
+    {
+        "name": "Katana Fuyu",
+        "description": "The Katana Fuyu is a Japanese sword that is made from the finest steel. It is a very sharp sword that is perfect for cutting through anything.",
+        "price": 1000,
+        "image": "https://katana-japonais.com/cdn/shop/products/IMG_2105_20210608-233138_700x.jpg?v=1695474023"
+    },
+    {
+        "name": "Katana Murasaki",
+        "description": "The Katana Murasaki is made with steel T10, a very high quality steel. It is a very sharp sword that is perfect for cutting through anything.",
+        "price": 600,
+        "image": "https://katana-japonais.com/cdn/shop/products/IMG_2112_20210608-233444_700x.jpg?v=1624530103"
+    },
+    {
+        "name": "Katana Jin",
+        "description": "Katana Jin est forgé en acier T10, connu pour sa résistance élevée à l'abrasion et sa capacité à maintenir une excellente netteté de la lame.",
+        "price": 1200,
+        "image": "https://katana-japonais.com/cdn/shop/products/IMG_2142_20210608-234435_700x.jpg?v=1624530054"
+    },
+    {
+        "name": "Katana Hana",
+        "description": "Ce Katana Hana est fabriqué en Tamahagane, un acier traditionnel japonais qui offre une dureté et une flexibilité exceptionnelles.",
+        "price": 1500,
+        "image": "https://katana-japonais.com/cdn/shop/products/IMG_2294_20210612-232502_700x.jpg?v=1624530033"
+    },
+    {
+        "name": "Katana Tatsu",
+        "description": "Le Katana Tatsu est réalisé avec une forge Kobuse, une méthode complexe associant dureté externe et souplesse interne pour une résistance optimale.",
+        "price": 1800,
+        "image": "https://katana-japonais.com/cdn/shop/products/IMG_2426_20210613-234137_700x.jpg?v=1624530154"
+    },
+    {
+        "name": "Katana Oni",
+        "description": "Katana Oni est fabriqué en acier 1090, un acier au carbone hautement résistant qui assure la durabilité et une excellente capacité de coupe.",
+        "price": 1300,
+        "image": "https://katana-japonais.com/cdn/shop/products/1_2_7877a917-f4b7-4859-9248-4ba53962e90b_700x.jpg?v=1664282357"
+    },
+    {
+        "name": "Katana Koi",
+        "description": "Forge Sanmai est la technique utilisée pour ce Katana Koi, combinant différentes couches d'acier pour une performance de coupe supérieure.",
+        "price": 1600,
+        "image": "https://katana-japonais.com/cdn/shop/products/img_2515_20210615-232056_700x.jpg?v=1624530179"
+    },
+    {
+        "name": "Katana Hebi",
+        "description": "Le Katana Hebi, fait de Tamahagane, illustre la quintessence de la forge japonaise, offrant une lame à la fois belle et mortelle.",
+        "price": 1700,
+        "image": "https://katana-japonais.com/cdn/shop/products/1_2_eb9a7e7f-f7a1-4527-92a0-f1388f90243d_700x.jpg?v=1676608339"
+    },
+    {
+        "name": "Katana Kuro",
+        "description": "Ce Katana Kuro est travaillé en acier Manganèse, offrant une résistance accrue à l'usure et une excellente capacité de tranchant.",
+        "price": 1100,
+        "image": "https://katana-japonais.com/cdn/shop/products/2_700x.png?v=1652090261"
+    },
+    {
+        "name": "Katana Shiro",
+        "description": "Katana Shiro est créé en utilisant une forge Kobuse, parfait pour les pratiquants cherchant équilibre entre tranchant et flexibilité.",
+        "price": 1400,
+        "image": "https://katana-japonais.com/cdn/shop/products/IMG_2362_20210613-231321_800x.jpg?v=1624530053"
+    },
+    {
+        "name": "Katana Aka",
+        "description": "Fabriqué en acier 1090, le Katana Aka combine robustesse et une capacité de coupe remarquable, adaptée à divers styles de combat.",
+        "price": 1350,
+        "image": "https://katana-japonais.com/cdn/shop/products/1_5925fb2a-a893-4051-8349-bae35d47f179_800x.png?v=1669236721"
+    },
+    {
+        "name": "Katana Midori",
+        "description": "Le Katana Midori utilise une forge Sanmai, offrant une lame robuste avec une capacité de tranchant exceptionnelle.",
+        "price": 1550,
+        "image": "https://katana-japonais.com/cdn/shop/products/1_8185fa50-5a15-4f24-abe4-cb6f01dddb18_800x.jpg?v=1667493298"
+    },
+    {
+        "name": "Katana Yuki",
+        "description": "Yuki est un katana réalisé en Tamahagane, renommé pour sa pureté et sa résistance, faisant écho aux traditions ancestrales des samouraïs.",
+        "price": 1750,
+        "image": "https://katana-japonais.com/cdn/shop/products/1_2_dc132960-4aba-41aa-9af8-2a1680671d27_800x.jpg?v=1676607782"
+    },
+    {
+        "name": "Katana Sora",
+        "description": "Sora est un katana forgé en acier T10, célèbre pour sa dureté qui garantit des performances de coupe supérieures.",
+        "price": 1250,
+        "image": "https://katana-japonais.com/cdn/shop/products/IMG_1605_20210601-234027_800x.jpg?v=1624530033"
+    },
+    {
+        "name": "Katana Riku",
+        "description": "Riku utilise un acier 1090, prisé pour sa résilience et sa capacité à supporter de fortes contraintes sans se briser.",
+        "price": 1600,
+        "image": "https://katana-japonais.com/cdn/shop/files/1_3_8e25b5e3-675c-480b-b8b9-dd46de22e7c1_800x.jpg?v=1685117327"
+    },
+    {
+        "name": "Katana Kaze",
+        "description": "Katana Kaze est fabriqué avec une forge Kobuse, une construction qui assure une grande durabilité à la lame face aux impacts.",
+        "price": 1900,
+        "image": "https://katana-japonais.com/cdn/shop/products/7_1aa8afe7-a4cc-48f6-9ab9-b2db8c138526_800x.png?v=1654313243"
+    }
+]

@@ -32,8 +32,6 @@ class AppFixtures extends Fixture
         $userNathan->setRoles(['ROLE_USER']);
         $userNathan->setPassword($this->userPasswordHasher->hashPassword($userNathan
         , 'password'));
-        $cartNathan = new Cart();
-        $cartNathan->setIdUser($userNathan);
         $manager->persist($userNathan);
 
 
@@ -46,8 +44,6 @@ class AppFixtures extends Fixture
         $userSteven->setRoles(['ROLE_USER']);
         $userSteven->setPassword($this->userPasswordHasher->hashPassword($userSteven
         , 'password'));
-        $cartSteven = new Cart();
-        $cartSteven->setIdUser($userSteven);
         $manager->persist($userSteven);
 
         $userSaid = new User();
@@ -60,64 +56,22 @@ class AppFixtures extends Fixture
         , 'password'));
         $manager->persist($userSaid);
 
-        // Create 30 product
-        for ($i = 0; $i < mt_rand(5, 30); $i++) {
+        // Load the katana.json file
+        $katanaJson = file_get_contents(__DIR__ . '/katana.json');
+        $katana = json_decode($katanaJson, true);
+
+        for($i = 0; $i < count($katana); $i++) {
             $product = new Product();
-            $product->setName('Product ' . $i);
-            $product->setPrice(mt_rand(10, 100));
-            $product->setDescription('Description of product ' . $i);
-            $product->setPhoto('https://i0.wp.com/monkatana.fr/wp-content/uploads/2022/08/Blueandwhiteporcelainkatana-d-d-e-e-e-b-ea-ff.jpg');
-
-            if (mt_rand(0, 1) === 1) {
-                $cartNathan->addProduct($product);
-            }
-
-            if (mt_rand(0, 1) === 1) {
-                $cartSteven->addProduct($product);
-            }
-
+            $product->setName($katana[$i]['name']);
+            $product->setPrice($katana[$i]['price']);
+            $product->setDescription($katana[$i]['description']);
+            $product->setPhoto($katana[$i]['image']);
             $manager->persist($product);
         }
 
-        for ($i = 0; $i < mt_rand(1, 3); $i++) {
-            $order = new Order();
-            $order->setIdUser($userNathan);
-            $order->setCreationDate(new \DateTime());
-
-            for($j = 0; $j < mt_rand(1, 5); $j++) {
-                $product = new Product();
-                $product->setName('Product Order ' . $j);
-                $product->setPrice(mt_rand(10, 100));
-                $product->setDescription('Description of product Order ' . $j);
-                $product->setPhoto('https://www.konjaku.fr/media/42392/vrai-katana-1.jpg');
-                $order->addProduct($product);
-                $manager->persist($product);
-            }
-
-            $manager->persist($order);
-        }
-
-        for ($i = 0; $i < mt_rand(1, 3); $i++) {
-            $order = new Order();
-            $order->setIdUser($userSteven);
-            $order->setCreationDate(new \DateTime());
-
-            for($j = 0; $j < mt_rand(1, 5); $j++) {
-                $product = new Product();
-                $product->setName('Product Order ' . $j);
-                $product->setPrice(mt_rand(10, 100));
-                $product->setDescription('Description of product Order ' . $j);
-                $product->setPhoto('https://www.konjaku.fr/media/42392/vrai-katana-1.jpg');
-                $order->addProduct($product);
-                $manager->persist($product);
-            }
-
-            $manager->persist($order);
-        }
-
-        $manager->persist($cartNathan);
-        $manager->persist($cartSteven);
         $manager->flush();
+
+        
 
     }
 }
