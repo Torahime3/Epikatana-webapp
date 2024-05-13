@@ -60,11 +60,17 @@
 
 .button_profile {
     text-align: center;
-    border-bottom: 1px black solid;
+    border: 2px solid rgb(171, 170, 170);
     list-style-type: none;
-    padding-bottom: 10px;
+    padding: 5px 2px;
+    border-radius: 10px;
     margin-bottom: 15px;
     cursor: pointer;
+    transition: border 0.3s;
+}
+
+.button_profile:hover {
+    border: 2px solid var(--secondary-color);
 }
 
 .profile_section:nth-child(1){

@@ -31,6 +31,7 @@
 .slide_img {
   width: 40vw;
   height: auto;
+  border-radius: 30px;
 }
 
 /* Description */
