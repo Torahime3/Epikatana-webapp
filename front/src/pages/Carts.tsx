@@ -35,14 +35,17 @@ const Carts = () => {
 
   if(cart === undefined){
     return (
-      <div className="cart_container">
-          <div className="cart_wrapper">
-              <div className="cart_section">
-                  <h1>Mon Panier</h1>
-                  <p>Votre panier est vide, ajoutez un produit depuis la page <Link to="/products">Produits</Link></p>
-              </div>
-          </div>
-      </div>
+      <>
+        <div className="bg_image_red"> </div>
+        <div className="cart_container">
+            <div className="cart_wrapper">
+                <div className="cart_section">
+                    <h1>Mon Panier</h1>
+                    <p>Votre panier est vide, ajoutez un produit depuis la page <Link to="/products">Produits</Link></p>
+                </div>
+            </div>
+        </div>
+      </>
     )
   }
 
