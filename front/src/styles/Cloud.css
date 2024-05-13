@@ -1,0 +1,17 @@
+.cloud {
+    position: absolute;
+    width: 200px;
+    animation: moveclouds 10s ease-in-out infinite;
+}
+
+@keyframes moveclouds {
+    0% {
+        margin-left: 150px;
+    }
+    50% {
+        margin-left: 0;
+    }
+    100%{
+        margin-left: 150px;
+    }
+}

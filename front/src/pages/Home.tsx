@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../styles/Home.css";
+import Cloud from "../components/Cloud";
 
 const HomePage: React.FC = () => {
 
@@ -20,6 +21,9 @@ const HomePage: React.FC = () => {
   return (
     <>
       <div className="bg_image_red"> </div>
+      <Cloud cloudId={1} initialX={100} initialY={100}/>
+      <Cloud cloudId={2} initialX={1000} initialY={250}/>
+      <Cloud cloudId={3} initialX={100} initialY={400}/>
       <div className="home-page">
         <div className="title">
           <h1>Epikatana, la reference du katana</h1>
