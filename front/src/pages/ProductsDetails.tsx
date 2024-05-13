@@ -21,14 +21,6 @@ const ProductDetailsPage: React.FC = () => {
   if (error) return <div>An error occurred: {error.message}</div>;
   if (!product) return <div>Product not found</div>;
 
-  const handleChange = (e: any) => {
-    e.preventDefault();
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    });
-  }
-
   const handleAddToCart = (e: any) => {
     e.preventDefault();
     console.log(form);
@@ -39,7 +31,8 @@ const ProductDetailsPage: React.FC = () => {
         'Content-Type': 'application/json',
         'Authorization': `bearer ${cookies.userToken}`
       },
-      body: JSON.stringify(form)
+      body: JSON.stringify(form),
+
     }).then(response => {
       if(response.ok) {
         alert('Produit ajouté au panier');
@@ -50,6 +43,14 @@ const ProductDetailsPage: React.FC = () => {
       
   }
 
+  const handleChange = (e: any) => {
+    e.preventDefault();
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+  }
+
   return ( 
     <> 
       <div className="product-details-container">
@@ -58,10 +59,10 @@ const ProductDetailsPage: React.FC = () => {
             <ProductDetails {...product} /> 
           </div>
           <div className="product-details-buy" >
-            <form className="product-details-form" onClick={handleAddToCart}>
+            <form className="product-details-form">
               <label className="product-details-quantity-label">Quantity:</label>
               <input className="product-details-quantity" type="number" defaultValue={form.quantity} min="1" max="99" onChange={handleChange}/>
-              <input type="submit" className="product-details-buy-button" value="Ajouter au panier"/>
+              <input type="submit" className="product-details-buy-button" value="Ajouter au panier"  onClick={handleAddToCart}/>
             </form>
           </div>
         </div>
