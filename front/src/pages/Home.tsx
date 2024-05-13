@@ -29,22 +29,22 @@ const HomePage: React.FC = () => {
           <div className="slider">
             <Slider {...settings}>
               <div>
-                <img src="https://images.unsplash.com/photo-1662826321315-c72a74f871c0?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="katana" />
+                <img className="slide_img" src="https://images.unsplash.com/photo-1662826321315-c72a74f871c0?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="katana" />
               </div>
               <div>
-                <img src="https://images.unsplash.com/photo-1671015522549-e7aa41ded44f?q=80&w=2971&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="katana" />
+                <img className="slide_img" src="https://images.unsplash.com/photo-1671015522549-e7aa41ded44f?q=80&w=2971&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="katana" />
               </div>
               <div>
-                <img src="https://images.unsplash.com/photo-1711725637816-b0755c582c86?q=80&w=3133&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="katana" />
+                <img className="slide_img" src="https://images.unsplash.com/photo-1711725637816-b0755c582c86?q=80&w=3133&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="katana" />
               </div>
               <div>
-                <img src="https://images.unsplash.com/photo-1673714220645-674fcab11e62?q=80&w=3155&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="katana" />
+                <img className="slide_img" src="https://images.unsplash.com/photo-1673714220645-674fcab11e62?q=80&w=3155&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="katana" />
               </div>
               <div>
-                <img src="https://images.unsplash.com/photo-1713766056256-9cb07ceda9e5?q=80&w=3014&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="katana" />
+                <img className="slide_img" src="https://images.unsplash.com/photo-1713766056256-9cb07ceda9e5?q=80&w=3014&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="katana" />
               </div>
               <div>
-                <img src="https://images.unsplash.com/photo-1616102343544-95fa53d0068f?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="katana" />
+                <img className="slide_img" src="https://images.unsplash.com/photo-1616102343544-95fa53d0068f?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="katana" />
               </div>
             </Slider>
           </div>
