@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { BiCartAdd } from 'react-icons/bi';
 import { BiSolidTrash } from "react-icons/bi";
 import { useCookies } from 'react-cookie';
+import { toast } from 'react-toastify';
 
 
 interface ProductProps {
@@ -35,14 +36,12 @@ const Product = ({ id, name, description, price, photo, viewInACart = false, rem
         }
         setHiddenClass("none");
         removeProductFromCart && removeProductFromCart(id);
+        toast.success('Produit supprimé du panier', {
+          autoClose: 1500,
+          hideProgressBar: true,
+        });
         return response.json();
       })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => { 
-        console.error(error);
-      });
   }
 
   const handleAddToCart = (e: any) => {
@@ -60,9 +59,12 @@ const Product = ({ id, name, description, price, photo, viewInACart = false, rem
 
     }).then(response => {
       if(response.ok) {
-        alert('Produit ajouté au panier');
+        toast.success('Produit ajouté au panier', {
+          autoClose: 1500,
+          hideProgressBar: true,
+        });
       } else {
-        alert('Erreur lors de l\'ajout au panier');
+        toast.error('Erreur lors de l\'ajout au panier');
       }
     });
   }

@@ -4,6 +4,7 @@ import { useProductDetails } from '../hooks/fetchDetails';
 import ProductDetails from '../components/ProductDetails';
 import '../styles/ProductsDetails.css';
 import { useCookies } from 'react-cookie';
+import { toast } from 'react-toastify';
 
 const ProductDetailsPage: React.FC = () => {
   const { id } = useParams<{ id?: string }>();
@@ -35,9 +36,12 @@ const ProductDetailsPage: React.FC = () => {
 
     }).then(response => {
       if(response.ok) {
-        alert('Produit ajouté au panier');
+        toast.success('Produit ajouté au panier', {
+          autoClose: 1500,
+          position: 'bottom-right'
+        });
       } else {
-        alert('Erreur lors de l\'ajout au panier');
+        toast.error('Une erreur est survenue');
       }
     });
       

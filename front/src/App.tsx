@@ -6,16 +6,18 @@ import Products from './pages/Products';
 import Orders from './pages/Orders';
 import OrderDetails from './pages/OrderDetails';
 import Authentication from './pages/Authentication';
-import Business from './pages/Business';
 import Profile from './pages/Profile';
 import Carts from './pages/Carts';
 import './App.css';
 import ProductDetailsPage from './pages/ProductsDetails';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
   return (
     <Router>
+      <ToastContainer />
       <div>
         <Header />
         <Routes>
@@ -30,6 +32,7 @@ function App() {
         </Routes>
         <Footer />
       </div>
+      
     </Router>
   )
 }

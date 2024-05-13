@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/Authentication.css';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Authentication: React.FC = () => {
 
@@ -21,19 +22,19 @@ const Authentication: React.FC = () => {
     if(registration){
 
       if(form.firstName === '' || form.lastName === '' || form.email === '' || form.password === '' || form.confirmPassword === ''){
-        alert('Veuillez remplir tous les champs');
+        toast.error('Veuillez remplir tous les champs');
         return false;
       }
 
       if(form.password !== form.confirmPassword) {
-        alert('Les mots de passe ne correspondent pas');
+        toast.error('Les mots de passe ne correspondent pas')
         return false;
       }
 
     } else {
 
       if(form.email === '' || form.password === ''){
-        alert('Veuillez remplir tous les champs');
+        toast.error('Veuillez remplir tous les champs');
         return false;
       }
 
@@ -62,10 +63,10 @@ const Authentication: React.FC = () => {
       body: JSON.stringify(form)
     }).then(response => {
       if(response.ok) {
-        alert('Inscription réussie');
+        toast.success('Inscription réussie');
         setRegistration(false);
       } else {
-        alert('Erreur lors de l\'inscription');
+        toast.error('Erreur lors de l\'inscription');
       }
     });
     } else {
@@ -83,10 +84,13 @@ const Authentication: React.FC = () => {
         response.json().then(data => {
           setCookies('userToken', data.token);
           navigate('/profile')
+          toast.success('Connexion réussie', {
+            autoClose: 2000
+          });
 
         });
       } else {
-        alert('Erreur lors de la connexion');
+        toast.error('Identifiant Incorrect');
       }
     });
     }
