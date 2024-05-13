@@ -3,6 +3,7 @@ import { useCookies } from "react-cookie";
 import { useCart } from "../hooks/fetchCart";
 import Product from "../components/Product";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Carts = () => {
 
@@ -38,7 +39,7 @@ const Carts = () => {
           <div className="cart_wrapper">
               <div className="cart_section">
                   <h1>Mon Panier</h1>
-                  <p>Vous n'êtes pas connecté</p>
+                  <p>Votre panier est vide, ajoutez un produit depuis la page <Link to="/products">Produits</Link></p>
               </div>
           </div>
       </div>

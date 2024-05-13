@@ -24,7 +24,11 @@ const ProductDetailsPage: React.FC = () => {
 
   const handleAddToCart = (e: any) => {
     e.preventDefault();
-    console.log(form);
+    
+    if(cookies.userToken === undefined){
+      toast.error('Vous devez être connecté pour ajouter un produit au panier');
+      return;
+    }
 
     fetch(`https://localhost:8000/api/carts/${productId}`, {
       method: 'POST',

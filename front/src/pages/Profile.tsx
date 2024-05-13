@@ -86,7 +86,13 @@ const Profile = () => {
     }
 
     if (isLoading) return (
-            <div>Loading...</div>       
+            <>
+            <div>Loading...</div>
+            <div className="profile_logout">
+                <button onClick={handleLogout}>Se déconnecter</button>
+            </div>;
+        </>  
+                 
     )
 
     if (error) return (
@@ -136,7 +142,9 @@ const Profile = () => {
                         <>
                         <h1>Mes commandes</h1>
                             <ul>
-                                {user.orders.map((order: any) => (
+                                {user.orders.lenght > 0 ?
+
+                                user.orders.map((order: any) => (
                                     <div className="order-container">
                                     <li key={order.id}>
                                         <p>Commande n°{order.id}</p>
@@ -157,7 +165,7 @@ const Profile = () => {
                                     </li>
                                 
                                     </div>
-                                ))}
+                                )) : <p>Vous n'avez pas encore commander</p>}
                             
                             </ul>
                         </>

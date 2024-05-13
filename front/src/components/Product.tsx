@@ -47,6 +47,11 @@ const Product = ({ id, name, description, price, photo, viewInACart = false, rem
   const handleAddToCart = (e: any) => {
     e.preventDefault();
 
+    if(cookies.userToken === undefined){
+      toast.error('Vous devez être connecté pour ajouter un produit au panier');
+      return;
+    }
+
     fetch(`https://localhost:8000/api/carts/${id}`, {
       method: 'POST',
       headers: {
@@ -77,7 +82,7 @@ const Product = ({ id, name, description, price, photo, viewInACart = false, rem
           <img src={photo} alt={name} />
           <div className="productInCart-details">
             <p className="product-type">Katana Japonais</p>
-            <h2>{name} {id}</h2>
+            <h2>{name}</h2>
             <p>{description}</p>
             <p>{price}€</p>
           </div>

@@ -1,13 +1,13 @@
 [
     {
         "name": "Katana Fuyu",
-        "description": "The Katana Fuyu is a Japanese sword that is made from the finest steel. It is a very sharp sword that is perfect for cutting through anything.",
+        "description": "Le Katana Fuyu est un sabre japonais fabriqué à partir de l'acier le plus fin. Il s'agit d'une épée très tranchante, parfaite pour couper n'importe quoi.",
         "price": 1000,
         "image": "https://katana-japonais.com/cdn/shop/products/IMG_2105_20210608-233138_700x.jpg?v=1695474023"
     },
     {
         "name": "Katana Murasaki",
-        "description": "The Katana Murasaki is made with steel T10, a very high quality steel. It is a very sharp sword that is perfect for cutting through anything.",
+        "description": "Le Katana Murasaki est fabriqué en acier T10, un acier de très haute qualité. Il s'agit d'une épée très tranchante, parfaite pour couper n'importe quoi.",
         "price": 600,
         "image": "https://katana-japonais.com/cdn/shop/products/IMG_2112_20210608-233444_700x.jpg?v=1624530103"
     },
