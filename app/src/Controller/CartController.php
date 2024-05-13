@@ -105,6 +105,14 @@ class CartController extends AbstractController
     public function addProductToCart(int $productId, CartRepository $cartRepository, EntityManagerInterface $em): JsonResponse
     {
         $user = $this->getUser();
+        
+        if($user->getCart() == null){
+            $cart = new Cart();
+            $cart->setIdUser($user);
+            $em->persist($cart);
+            $em->flush();
+        }
+
         $cart = $cartRepository->findOneBy(['idUser' => $user->getId()]);
         $product = $em->getRepository(Product::class)->find($productId);
         $cart->addProduct($product);
