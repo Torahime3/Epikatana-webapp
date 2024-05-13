@@ -23,8 +23,13 @@
  margin-bottom: 3em;
 }
 
+.slick-slide img {
+  display: inline;
+  padding-top: 3vh;
+}
+
 img {
-  max-width: 100%;
+  width: 40vw;
   height: auto;
 }
 
