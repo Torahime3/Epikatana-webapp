@@ -45,6 +45,28 @@ const Product = ({ id, name, description, price, photo, viewInACart = false, rem
       });
   }
 
+  const handleAddToCart = (e: any) => {
+    e.preventDefault();
+
+    fetch(`https://localhost:8000/api/carts/${id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `bearer ${cookies.userToken}`
+      },
+      body: JSON.stringify({
+        quantity: 1
+      }),
+
+    }).then(response => {
+      if(response.ok) {
+        alert('Produit ajouté au panier');
+      } else {
+        alert('Erreur lors de l\'ajout au panier');
+      }
+    });
+  }
+
   if(viewInACart){
     return (
       <>
@@ -76,7 +98,7 @@ const Product = ({ id, name, description, price, photo, viewInACart = false, rem
           <Link to={`/products/${id}`} className="product-button-see">
             Afficher les détails
           </Link>
-          <button className="product-button-addtocart">
+          <button className="product-button-addtocart" onClick={handleAddToCart}>
             <BiCartAdd />
           </button>
         </div>
