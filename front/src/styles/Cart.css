@@ -10,8 +10,6 @@
   display: flex;
   margin-top: 20px;
   width: clamp(300px, 80%, 1000px);
-
-
 }
 
 .products{
@@ -31,4 +29,14 @@
   padding: 20px;
   margin: 10px;
   border-radius: 10px;
+}
+
+
+@media screen and (max-width: 768px){
+  .cart_wrapper{
+    flex-direction: column;
+  }
+  .products{
+    width: 96%;
+  }
 }

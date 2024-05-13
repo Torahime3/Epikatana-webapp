@@ -22,6 +22,7 @@ const ProductDetailsPage: React.FC = () => {
   if (!product) return <div>Product not found</div>;
 
   const handleChange = (e: any) => {
+    e.preventDefault();
     setForm({
       ...form,
       [e.target.name]: e.target.value
