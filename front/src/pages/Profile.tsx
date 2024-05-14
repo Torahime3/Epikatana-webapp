@@ -49,7 +49,7 @@ const Profile = () => {
             alert("Veuillez remplir tous les champs");
             return;
         }
-        
+
         if(form.password !== form.confirmPassword){
             alert("Les mots de passe ne correspondent pas");
             return;
@@ -85,15 +85,17 @@ const Profile = () => {
     }
 
     if (isLoading) return (
-            <div>Loading...</div>       
+            <div>Loading...</div>
     )
 
     if (error) return (
         <>
+          <div className="loading_page">
             <div>An error occurred: {error.message}</div>
             <div className="profile_logout">
                 <button onClick={handleLogout}>Se déconnecter</button>
-            </div>;
+            </div>
+          </div>
         </>
     )
 
@@ -154,13 +156,13 @@ const Profile = () => {
                                             </ul>
                                         </details>
                                     </li>
-                                
+
                                     </div>
                                 ))}
-                            
+
                             </ul>
                         </>
-                    ) : 
+                    ) :
                     <>
                     <h1>Mes informations</h1>
                     <div className="informations_sections">
@@ -180,9 +182,9 @@ const Profile = () => {
                     </div>
                     </>
                     }
-                  
+
                 </div>
-              
+
             </div>
             <div className="profile_logout">
                 <button onClick={handleLogout}>Se déconnecter</button>
