@@ -33,13 +33,18 @@
 
   .header_navbar li {
     list-style: none;
-    margin: 5px 0px;
+    margin: 5px;
     padding: 5px;
+    border: 2px solid rgb(113, 113, 113);
+    border-radius: 5px;
+    transition: border 0.3s;
   }
 
-  .header_navbar li:not(:last-child) {
-    border-right: 1px solid white; /* Ajoute une bordure droite à tous les éléments sauf le dernier */
+  .header_navbar li:hover {
+    background: var(--hover-background-color);
+    border: 2px solid var(--secondary-color);
   }
+
 
   .header_navbar a {
     text-decoration: none;

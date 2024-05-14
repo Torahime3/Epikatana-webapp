@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { BiCartAdd } from 'react-icons/bi';
 import { BiSolidTrash } from "react-icons/bi";
 import { useCookies } from 'react-cookie';
+import { toast } from 'react-toastify';
 
 
 interface ProductProps {
@@ -35,14 +36,42 @@ const Product = ({ id, name, description, price, photo, viewInACart = false, rem
         }
         setHiddenClass("none");
         removeProductFromCart && removeProductFromCart(id);
+        toast.success('Produit supprimé du panier', {
+          autoClose: 1500,
+          hideProgressBar: true,
+        });
         return response.json();
       })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => { 
-        console.error(error);
-      });
+  }
+
+  const handleAddToCart = (e: any) => {
+    e.preventDefault();
+
+    if(cookies.userToken === undefined){
+      toast.error('Vous devez être connecté pour ajouter un produit au panier');
+      return;
+    }
+
+    fetch(`https://localhost:8000/api/carts/${id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `bearer ${cookies.userToken}`
+      },
+      body: JSON.stringify({
+        quantity: 1
+      }),
+
+    }).then(response => {
+      if(response.ok) {
+        toast.success('Produit ajouté au panier', {
+          autoClose: 1500,
+          hideProgressBar: true,
+        });
+      } else {
+        toast.error('Erreur lors de l\'ajout au panier');
+      }
+    });
   }
 
   if(viewInACart){
@@ -53,7 +82,7 @@ const Product = ({ id, name, description, price, photo, viewInACart = false, rem
           <img src={photo} alt={name} />
           <div className="productInCart-details">
             <p className="product-type">Katana Japonais</p>
-            <h2>{name} {id}</h2>
+            <h2>{name}</h2>
             <p>{description}</p>
             <p>{price}€</p>
           </div>
@@ -76,7 +105,7 @@ const Product = ({ id, name, description, price, photo, viewInACart = false, rem
           <Link to={`/products/${id}`} className="product-button-see">
             Afficher les détails
           </Link>
-          <button className="product-button-addtocart">
+          <button className="product-button-addtocart" onClick={handleAddToCart}>
             <BiCartAdd />
           </button>
         </div>

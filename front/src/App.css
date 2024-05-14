@@ -13,6 +13,10 @@ h1{
   letter-spacing: 4px;
 }
 
+h1::before{
+  content: '⛩️';
+}
+
 body {
       background-color: #e0e0e0;
 }
