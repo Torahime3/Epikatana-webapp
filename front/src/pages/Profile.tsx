@@ -86,17 +86,21 @@ const Profile = () => {
     }
 
     if (isLoading) return (
-            <>
-            <div>Loading...</div>
-            <div className="profile_logout">
-                <button onClick={handleLogout}>Se déconnecter</button>
-            </div>;
+        <>
+          <div className="bg_image_red"> </div>
+          <div className="loading_page">
+              <div>Loading...</div>
+              <div className="profile_logout">
+                  <button onClick={handleLogout}>Se déconnecter</button>
+              </div>
+          </div>
         </>
 
     )
 
     if (error) return (
         <>
+          <div className="bg_image_red"> </div>
           <div className="loading_page">
             <div>An error occurred: {error.message}</div>
             <div className="profile_logout">
