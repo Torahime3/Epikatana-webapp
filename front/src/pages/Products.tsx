@@ -10,8 +10,23 @@ const ProductList = () => {
   const { data: products, isLoading, error } = useProducts();
   const [searchTerm, setSearchTerm] = useState('');
 
-  if (isLoading) return <div className="loading_page"><div className="loading_text">Loading...</div></div>;
-  if (error) return <div className="loading_page"><div className="loading_text">An error occurred: {error.message}</div></div>;
+  if (isLoading) return (
+    <>
+      <div className="bg_image_red"> </div>
+      <div className="loading_page">
+        <div className="loading_text">Loading...</div>
+      </div>
+    </>
+  )
+
+  if (error) return (
+    <>
+      <div className="bg_image_red"> </div>
+      <div className="loading_page">
+        <div className="loading_text">An error occurred: {error.message}</div>
+      </div>
+    </>
+  )
 
   const filteredProducts = products.filter((product: { name: string; }) =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
