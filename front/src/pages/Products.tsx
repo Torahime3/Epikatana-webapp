@@ -34,7 +34,7 @@ const ProductList = () => {
 
   return (
     <>
-      <div className="bg_image_red"> </div>
+      <div className="bg_image_red"></div>
       <div className="page_container">
         <h1 className="title_section"> Nos produits </h1>
 

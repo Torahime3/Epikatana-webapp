@@ -89,7 +89,7 @@ const Profile = () => {
         <>
           <div className="bg_image_red"> </div>
           <div className="loading_page">
-              <div>Loading...</div>
+              <div className="loading_text">Loading...</div>
               <div className="profile_logout">
                   <button onClick={handleLogout}>Se déconnecter</button>
               </div>
@@ -102,7 +102,7 @@ const Profile = () => {
         <>
           <div className="bg_image_red"> </div>
           <div className="loading_page">
-            <div>An error occurred: {error.message}</div>
+            <div className="loading_text">An error occurred: {error.message}</div>
             <div className="profile_logout">
                 <button onClick={handleLogout}>Se déconnecter</button>
             </div>

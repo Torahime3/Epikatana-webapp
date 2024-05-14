@@ -84,6 +84,7 @@ const ProductDetailsPage: React.FC = () => {
 
   return (
     <>
+      <div className="bg_image_red"></div>
       <div className="product-details-container">
         <div className="product-details-wrapper">
           <div className="product-details-card">
