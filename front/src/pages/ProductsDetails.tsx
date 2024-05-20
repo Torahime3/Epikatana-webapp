@@ -20,13 +20,36 @@ const ProductDetailsPage: React.FC = () => {
     quantity: 1
   })
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>An error occurred: {error.message}</div>;
-  if (!product) return <div>Product not found</div>;
+  if (isLoading) return (
+    <>
+      <div className="bg_image_red"> </div>
+      <div className="loading_page">
+        <div className="loading_text">Loading...</div>;
+      </div>
+    </>
+  )
+
+  if (error) return (
+    <>
+      <div className="bg_image_red"> </div>
+      <div className="loadgin_page">
+        <div className="loading_text">An error occurred: {error.message}</div>;
+      </div>
+    </>
+  )
+
+  if (!product) return (
+    <>
+      <div className="bg_image_red"> </div>
+      <div className="loading_page">
+        <div className="loading_text">Product not found</div>
+      </div>
+    </>
+  )
 
   const handleAddToCart = (e: any) => {
     e.preventDefault();
-    
+
     if(cookies.userToken === undefined){
       toast.error('Vous devez être connecté pour ajouter un produit au panier');
       return;
@@ -50,7 +73,7 @@ const ProductDetailsPage: React.FC = () => {
         toast.error('Une erreur est survenue');
       }
     });
-      
+
   }
 
   const handleChange = (e: any) => {
@@ -61,12 +84,13 @@ const ProductDetailsPage: React.FC = () => {
     });
   }
 
-  return ( 
-    <> 
+  return (
+    <>
+      <div className="bg_image_red"></div>
       <div className="product-details-container">
         <div className="product-details-wrapper">
           <div className="product-details-card">
-            <ProductDetails {...product} /> 
+            <ProductDetails {...product} />
           </div>
           <div className="product-details-buy" >
             <form className="product-details-form">
@@ -77,7 +101,7 @@ const ProductDetailsPage: React.FC = () => {
           </div>
         </div>
       </div>
-    </> 
+    </>
   );
 };
 

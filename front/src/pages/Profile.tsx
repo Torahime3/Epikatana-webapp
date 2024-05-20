@@ -52,7 +52,7 @@ const Profile = () => {
             toast.error("Veuillez remplir tous les champs");
             return;
         }
-        
+
         if(form.password !== form.confirmPassword){
             toast.error("Les mots de passe ne correspondent pas");
             return;
@@ -88,21 +88,27 @@ const Profile = () => {
     }
 
     if (isLoading) return (
-            <>
-            <div>Loading...</div>
-            <div className="profile_logout">
-                <button onClick={handleLogout}>Se déconnecter</button>
-            </div>;
-        </>  
-                 
+        <>
+          <div className="bg_image_red"> </div>
+          <div className="loading_page">
+              <div className="loading_text">Loading...</div>
+              <div className="profile_logout">
+                  <button onClick={handleLogout}>Se déconnecter</button>
+              </div>
+          </div>
+        </>
+
     )
 
     if (error) return (
         <>
-            <div>An error occurred: {error.message}</div>
+          <div className="bg_image_red"> </div>
+          <div className="loading_page">
+            <div className="loading_text">An error occurred: {error.message}</div>
             <div className="profile_logout">
                 <button onClick={handleLogout}>Se déconnecter</button>
-            </div>;
+            </div>
+          </div>
         </>
     )
 
@@ -165,13 +171,13 @@ const Profile = () => {
                                             </ul>
                                         </details>
                                     </li>
-                                
+
                                     </div>
                                 )) : <p>Vous n'avez pas encore commander</p>}
-                            
+
                             </ul>
                         </>
-                    ) : 
+                    ) :
                     <>
                     <h1>Mes informations</h1>
                     <div className="informations_sections">
@@ -191,9 +197,9 @@ const Profile = () => {
                     </div>
                     </>
                     }
-                  
+
                 </div>
-              
+
             </div>
             <div className="profile_logout">
                 <button onClick={handleLogout}>Se déconnecter</button>
