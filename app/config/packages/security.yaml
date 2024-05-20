@@ -38,6 +38,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
         - { path: ^/api/register, roles: PUBLIC_ACCESS}
         - { path: ^/api/products, roles: PUBLIC_ACCESS }
@@ -60,7 +61,7 @@ nelmio_cors:
     paths:
         '^/api/':
             allow_origin: ['http://localhost:5173']
-            allow_methods: ['GET', 'OPTIONS'] 
-            allow_headers: ['Content-Type', 'Authorization'] 
-            max_age: 3600 
-            hosts: ['^localhost$', '^127.0.0.1$'] 
+            allow_methods: ['GET', 'OPTIONS']
+            allow_headers: ['Content-Type', 'Authorization']
+            max_age: 3600
+            hosts: ['^localhost$', '^127.0.0.1$']
