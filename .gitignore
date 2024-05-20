@@ -8,3 +8,4 @@ app/public/bundles/
 app/var/
 app/vendor/
 .DS_Store
+postgres_data/
