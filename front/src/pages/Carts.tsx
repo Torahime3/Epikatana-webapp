@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useCart } from "../hooks/fetchCart";
 import Product from "../components/Product";
@@ -64,47 +64,17 @@ const Carts = () => {
       console.log(error);
       alert("Échec du paiement");
     }
-};
+  };
 
-
-  if (cart === undefined) {
-    return (
-      <>
-        <div className="bg_image_red"></div>
-        <div className="cart_container">
-          <div className="cart_wrapper">
-            <div className="cart_section">
-              <h1>Mon Panier</h1>
-              <p>
-                Votre panier est vide, ajoutez un produit depuis la page <Link to="/products">Produits</Link>
-              </p>
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  }
-
-  if (isLoading) {
+  if (!cart || isLoading || error) {
     return (
       <div className="cart_container">
         <div className="cart_wrapper">
           <div className="cart_section">
             <h1>Mon Panier</h1>
-            <p>Chargement en cours...</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="cart_container">
-        <div className="cart_wrapper">
-          <div className="cart_section">
-            <h1>Mon Panier</h1>
-            <p>Une erreur est survenue</p>
+            {isLoading && <p>Chargement en cours...</p>}
+            {error && <p>Une erreur est survenue</p>}
+            {!cart && <p>Votre panier est vide, ajoutez un produit depuis la page <Link to="/products">Produits</Link></p>}
           </div>
         </div>
       </div>
@@ -124,17 +94,19 @@ const Carts = () => {
               ))}
             </div>
           </div>
-          <div className="cart_section infos">
-            <h1>Informations</h1>
-            <p>Prix total : {totalPrice}€</p>
-            <StripeCheckout
-              token={onToken}
-              stripeKey="pk_test_51PG0NQLQ6aQSRWzZ9XjixBqI5E11SJh418smxfhe4EX059jsyFBh3SRZ0qYFE40b2LEk8wRU58MorBV83bjgRU8p00bDl0d2Id"
-              name="Your Cart"
-              amount={totalPrice * 100}
-              currency="EUR"
-            />
-          </div>
+          {products.length > 0 && (
+            <div className="cart_section infos">
+              <h1>Informations</h1>
+              <p>Prix total : {totalPrice}€</p>
+              <StripeCheckout
+                token={onToken}
+                stripeKey="pk_test_51PG0NQLQ6aQSRWzZ9XjixBqI5E11SJh418smxfhe4EX059jsyFBh3SRZ0qYFE40b2LEk8wRU58MorBV83bjgRU8p00bDl0d2Id"
+                name="Your Cart"
+                amount={totalPrice * 100}
+                currency="EUR"
+              />
+            </div>
+          )}
         </div>
       </div>
     </>
