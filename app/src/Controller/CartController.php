@@ -120,5 +120,25 @@ class CartController extends AbstractController
         return new JsonResponse(null, Response::HTTP_CREATED);
     }
 
-   
+   // ROUTE POUR SUPPRIMER TOUS LES PRODUITS DANS LE CART
+#[Route('/api/clear', name: 'carts_clear', methods: ['POST'])]
+public function clearCart(CartRepository $cartRepository, EntityManagerInterface $em): JsonResponse
+{
+    $user = $this->getUser();
+    $cart = $cartRepository->findOneBy(['idUser' => $user->getId()]);
+    
+    if (!$cart) {
+        return new JsonResponse(['error' => 'Cart not found'], Response::HTTP_NOT_FOUND);
+    }
+
+    foreach ($cart->getProducts() as $product) {
+        $cart->removeProduct($product);
+    }
+    
+    $em->persist($cart);
+    $em->flush();
+    
+    return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+}
+
 }

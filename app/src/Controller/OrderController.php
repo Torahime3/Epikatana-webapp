@@ -55,10 +55,21 @@ class OrderController extends AbstractController
     #[Route('/api/orders', name: 'orders_post', methods: ['POST'])]
     public function createOrder(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator): JsonResponse 
     {
-        $order = $serializer->deserialize($request->getContent(), Order::class, 'json');
-        $em->persist($order);
+        $user = $this->getUser();
+
+        $cart = new Order();
+        $cart->setIdUser($user);
+        $cart->setCreationDate(new \DateTime());
+    
+        $test = $user->getCart()->getProducts();
+        foreach($test as $product){
+            $cart->addProduct($product);
+            $cart->setTotalPrice($cart->getTotalPrice());
+        }
+
+        $em->persist($cart);
         $em->flush();
-        return new JsonResponse(null, Response::HTTP_CREATED, ['Location' => $urlGenerator->generate('orders_getById', ['id' => $order->getId()])]);
+        return new JsonResponse(null, Response::HTTP_CREATED, ['Location' => $urlGenerator->generate('orders_getById', ['id' => $cart->getId()])]);
     }
 
     //ROUTE POUR DELETE UN ORDER
