@@ -3,6 +3,7 @@ import '../styles/Authentication.css';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+const apiScheme = import.meta.env.VITE_API_SCHEME;
 
 const Authentication: React.FC = () => {
 
@@ -55,7 +56,7 @@ const Authentication: React.FC = () => {
     if(!checkFormValidity()) return;
 
     if(registration){
-      fetch('https://localhost:8000/api/register', {
+      fetch(`${apiScheme}://localhost:8000/api/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -70,7 +71,7 @@ const Authentication: React.FC = () => {
       }
     });
     } else {
-      fetch('https://localhost:8000/api/login', {
+      fetch(`${apiScheme}://localhost:8000/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

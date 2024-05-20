@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
+const apiScheme = import.meta.env.VITE_API_SCHEME;
 
 const fetchCart = async (userToken: any) => {
 
     console.log();
-    const response = await fetch('https://localhost:8000/api/carts', {
+    const response = await fetch(`${apiScheme}://localhost:8000/api/carts`, {
         headers: {
             Authorization: `bearer ${userToken}`,
         },

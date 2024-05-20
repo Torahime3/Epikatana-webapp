@@ -4,7 +4,7 @@ import { BiCartAdd } from 'react-icons/bi';
 import { BiSolidTrash } from "react-icons/bi";
 import { useCookies } from 'react-cookie';
 import { toast } from 'react-toastify';
-
+const apiScheme = import.meta.env.VITE_API_SCHEME;
 
 interface ProductProps {
   id: number;
@@ -23,7 +23,7 @@ const Product = ({ id, name, description, price, photo, viewInACart = false, rem
 
   const handleDelete = () => {
     console.log(id);
-    fetch(`https://localhost:8000/api/carts/${id}`, {
+    fetch(`${apiScheme}://localhost:8000/api/carts/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ const Product = ({ id, name, description, price, photo, viewInACart = false, rem
       return;
     }
 
-    fetch(`https://localhost:8000/api/carts/${id}`, {
+    fetch(`${apiScheme}://localhost:8000/api/carts/${id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

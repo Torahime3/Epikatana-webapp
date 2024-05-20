@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCookies } from 'react-cookie';
+const apiScheme = import.meta.env.VITE_API_SCHEME;
+
 
 const fetchOrders = async (token: string) => {
-  const response = await fetch('https://localhost:8000/api/orders', {
+  const response = await fetch(`${apiScheme}://localhost:8000/api/orders`, {
     headers: {
       'Authorization': `Bearer ${token}`,
     },

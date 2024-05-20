@@ -4,6 +4,8 @@ import "../styles/Profile.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+const apiScheme = import.meta.env.VITE_API_SCHEME;
+
 
 const Profile = () => {
     const [cookies, setCookie, removeCookie] = useCookies(['userToken']);
@@ -56,7 +58,7 @@ const Profile = () => {
             return;
         }
 
-        fetch("https://localhost:8000/api/users", {
+        fetch(`${apiScheme}://localhost:8000/api/users`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

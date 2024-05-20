@@ -5,6 +5,8 @@ import ProductDetails from '../components/ProductDetails';
 import '../styles/ProductsDetails.css';
 import { useCookies } from 'react-cookie';
 import { toast } from 'react-toastify';
+const apiScheme = import.meta.env.VITE_API_SCHEME;
+
 
 const ProductDetailsPage: React.FC = () => {
   const { id } = useParams<{ id?: string }>();
@@ -30,7 +32,7 @@ const ProductDetailsPage: React.FC = () => {
       return;
     }
 
-    fetch(`https://localhost:8000/api/carts/${productId}`, {
+    fetch(`${apiScheme}://localhost:8000/api/carts/${productId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
