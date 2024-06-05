@@ -1,12 +1,10 @@
-# DEBUT DE README -> A MODIFIER (c'est juste un résumé pour l'instant)
-
 # 🎌 EPITECH Katana
-
+s
 ![EPITECH Katana](https://link-to-logo.png)
 
 ## Introduction
 
-🚀 EPITECH Katana project aims to develop a robust API for e-commerce merchant sites specializing in computer components. This README provides comprehensive guidance on the project requirements, including backend and frontend development, deployment using Docker, API specifications, user management, product catalog, orders, storage, frontend implementation, payment integration, and development environment setup.
+🚀 EPITECH Katana project aims to develop a robust API for e-commerce merchant sites specializing in Katana. This README provides comprehensive guidance on the project requirements, including backend and frontend development, deployment using Docker, API specifications, user management, product catalog, orders, storage, frontend implementation, payment integration, and development environment setup.
 
 ## Project Overview
 
